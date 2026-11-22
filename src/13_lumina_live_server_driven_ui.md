@@ -1,12 +1,12 @@
-# ⚡ Modul 13: Lumina Live — Server-Driven Reactive UI
+# ⚡ Modul 13: Pakem Live — Server-Driven Reactive UI
 
 > *"Keajaiban Fullstack Reactive UI Tanpa Menulis Sebaris JavaScript Pun — Tulis Logika di Rust, Render di Blade, Nikmati Interaktivitas Setara SPA dengan Kecepatan Sub-Milidetik."*
 
 ---
 
-## 🎯 1. Pengenalan Lumina Live
+## 🎯 1. Pengenalan Pakem Live
 
-**Lumina Live** adalah paradigma *Server-Driven Reactive UI* pertama di dunia yang dibangun di atas performa mentah **Rust, Tokio, dan Axum**. Terinspirasi dari Laravel Livewire 3 dan Phoenix LiveView, Lumina Live memungkinkan Anda membuat komponen UI interaktif (seperti counter, live search, filter data table dinamis, modal popup, dan validasi form real-time) **murni menggunakan Rust dan Blade**.
+**Pakem Live** adalah paradigma *Server-Driven Reactive UI* pertama di dunia yang dibangun di atas performa mentah **Rust, Tokio, dan Axum**. Terinspirasi dari Laravel Livewire 3 dan Phoenix LiveView, Pakem Live memungkinkan Anda membuat komponen UI interaktif (seperti counter, live search, filter data table dinamis, modal popup, dan validasi form real-time) **murni menggunakan Rust dan Blade**.
 
 ### Keunggulan Utama:
 1. **Zero JavaScript Overhead**: Tidak perlu setup bundler (Webpack, Vite, npm, node_modules).
@@ -22,10 +22,10 @@
 
 ## 🔨 2. Membuat Komponen Live Baru
 
-Gunakan generator CLI Lumina:
+Gunakan generator CLI Pakem:
 
 ```bash
-lumina make:live Counter
+canting make:live Counter
 ```
 
 Perintah di atas akan secara otomatis menghasilkan:
@@ -39,7 +39,7 @@ Perintah di atas akan secara otomatis menghasilkan:
 
 ```rust
 use async_trait::async_trait;
-use lumina::prelude::*;
+use pakem::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -129,7 +129,7 @@ Cukup sematkan direktif `@kilat('nama_komponen')` atau `@live('nama_komponen')` 
 
 @section('content')
 <div class="container mx-auto py-12">
-    <h1 class="text-3xl font-bold text-center">Demo Lumina Live</h1>
+    <h1 class="text-3xl font-bold text-center">Demo Pakem Live</h1>
 
     <!-- Memanggil komponen Counter -->
     @kilat('counter')
@@ -171,4 +171,4 @@ Cukup sematkan direktif `@kilat('nama_komponen')` atau `@live('nama_komponen')` 
 
 ---
 
-👉 *Dengan Lumina Live, Anda tidak perlu lagi memilih antara kenyamanan SSR Monolith dan interaktivitas SPA. Anda mendapatkan keduanya dengan kecepatan maksimal Rust!*
+👉 *Dengan Pakem Live, Anda tidak perlu lagi memilih antara kenyamanan SSR Monolith dan interaktivitas SPA. Anda mendapatkan keduanya dengan kecepatan maksimal Rust!*

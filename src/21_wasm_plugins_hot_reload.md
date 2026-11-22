@@ -2,7 +2,7 @@
 
 > *"Look like Laravel, Run at Rust Speed. Menghadirkan ekosistem ekstensi WebAssembly terisolasi dengan kemampuan hot-reloading tanpa downtime dan proteksi kegagalan berstandar militer."*
 
-Selamat datang di **Modul 21 Dokumentasi Resmi Lumina Framework**! Pada modul ini, kita akan mempelajari arsitektur **Dynamic WebAssembly (WASM) Plugin Registry**, fitur enterprise Lumina yang memungkinkan penambahan logika kustom, filter template, dan lifecycle hooks pihak ketiga tanpa pernah mengorbankan kestabilan server inti (*zero-crash guarantee*).
+Selamat datang di **Modul 21 Dokumentasi Resmi Pakem Framework**! Pada modul ini, kita akan mempelajari arsitektur **Dynamic WebAssembly (WASM) Plugin Registry**, fitur enterprise Pakem yang memungkinkan penambahan logika kustom, filter template, dan lifecycle hooks pihak ketiga tanpa pernah mengorbankan kestabilan server inti (*zero-crash guarantee*).
 
 ---
 
@@ -10,7 +10,7 @@ Selamat datang di **Modul 21 Dokumentasi Resmi Lumina Framework**! Pada modul in
 
 Pada arsitektur monolitik konvensional, menambahkan kode pihak ketiga (misalnya kalkulator pajak daerah, parser dokumen khusus, atau modul anti-fraud) memiliki risiko fatal: jika kode tersebut mengalami *panic* (*out-of-bounds array*, *null dereference*), seluruh server akan jatuh (*crash*).
 
-Lumina mengadopsi engine **WebAssembly runtime (`wasmi 2.0`)** dengan keunggulan mutlak:
+Pakem mengadopsi engine **WebAssembly runtime (`wasmi 2.0`)** dengan keunggulan mutlak:
 1. **Linear Memory Isolation**: Setiap plugin berjalan dalam ruang memori 32-bit terpisah.
 2. **Fault & Trap Isolation**: Jika plugin mengalami panic, hanya modul WASM tersebut yang ter-trap; server host tetap melayani jutaan pengguna dengan normal.
 3. **Zero-Downtime Hot-Reloading**: Anda dapat memperbarui biner `.wasm` saat server sedang berjalan di lingkungan produksi tanpa perlu me-restart proses server.
@@ -19,7 +19,7 @@ Lumina mengadopsi engine **WebAssembly runtime (`wasmi 2.0`)** dengan keunggulan
 
 ## 🚀 2. Manajemen Plugin via CLI
 
-Lumina CLI menyediakan toolchain lengkap untuk siklus hidup plugin:
+Pakem CLI menyediakan toolchain lengkap untuk siklus hidup plugin:
 
 ### A. Membuat Plugin WASM Baru
 ```bash
@@ -48,7 +48,7 @@ lumina plugin:metrics
 ```
 Output:
 ```text
-📊 Lumina WASM Sandbox & Plugin Metrics Dashboard
+📊 Pakem WASM Sandbox & Plugin Metrics Dashboard
 
 Total WASM Modules Loaded : 2
 Script Modules Cached     : 0
@@ -66,7 +66,7 @@ Script Modules Cached     : 0
 lumina plugin:reload
 ```
 ```text
-🔄 Reloading Lumina WASM Plugins (Zero-Downtime Hot-Reload)...
+🔄 Reloading Pakem WASM Plugins (Zero-Downtime Hot-Reload)...
 ✅ [Reload Success] Berhasil memuat ulang 2 plugin dalam 3.42ms tanpa downtime! ⚡
 ```
 
@@ -74,16 +74,16 @@ lumina plugin:reload
 
 ## 🔄 3. Zero-Downtime Hot-Reloading Otomatis
 
-Di aplikasi Lumina, Anda dapat mengaktifkan pemantauan otomatis (*background file watcher*) yang mendeteksi pembaruan file `.wasm` secara asinkron:
+Di aplikasi Pakem, Anda dapat mengaktifkan pemantauan otomatis (*background file watcher*) yang mendeteksi pembaruan file `.wasm` secara asinkron:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use std::time::Duration;
 
 #[tokio::main]
 async fn main() {
     let app = Application::new();
-    let plugin_manager = LuminaPluginManager::new();
+    let plugin_manager = PakemPluginManager::new();
 
     // Memuat seluruh plugin awal dari folder plugins/
     plugin_manager.load_directory("plugins").unwrap();
@@ -137,4 +137,4 @@ Plugin WASM juga dapat digunakan langsung sebagai pipeline filter di template Bl
 ---
 
 ## 🎯 Kesimpulan
-Dengan kehadiran **Lumina Tinker** dan **Dynamic WASM Plugin Registry**, Lumina Framework v1.0.0 resmi menetapkan standar baru bagi arsitektur framework backend modern: **produktif, seindah Laravel, dan secepat serta seaman Rust!**
+Dengan kehadiran **Pakem Tinker** dan **Dynamic WASM Plugin Registry**, Pakem Framework v1.0.0 resmi menetapkan standar baru bagi arsitektur framework backend modern: **produktif, seindah Laravel, dan secepat serta seaman Rust!**

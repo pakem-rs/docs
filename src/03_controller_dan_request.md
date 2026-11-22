@@ -2,16 +2,16 @@
 
 Controller bertanggung jawab menerima request dari client, memanggil model atau service untuk memproses logika bisnis, dan mengembalikan hasil dalam bentuk halaman HTML (View) atau format JSON (API).
 
-Di Lumina Framework, Controller dirancang dengan filosofi **Zero Boilerplate**. Anda tidak perlu menuliskan puluhan extractor mentah Axum (`State`, `Path`, `Query`, `Session`, `CsrfToken`, dsb.). Sebagai gantinya, Lumina menyediakan **Unified `Request` Bundle** dan response return type **`impl IntoResponse`** atau **`LuminaResult`** yang sangat ekspresif, bersih, dan mudah dibaca!
+Di Pakem Framework, Controller dirancang dengan filosofi **Zero Boilerplate**. Anda tidak perlu menuliskan puluhan extractor mentah Axum (`State`, `Path`, `Query`, `Session`, `CsrfToken`, dsb.). Sebagai gantinya, Pakem menyediakan **Unified `Request` Bundle** dan response return type **`impl IntoResponse`** atau **`PakemResult`** yang sangat ekspresif, bersih, dan mudah dibaca!
 
 ---
 
-## 1. Membuat Controller (`lumina make:controller`)
+## 1. Membuat Controller (`canting make:controller`)
 
-Gunakan CLI Lumina untuk membuat controller baru:
+Gunakan CLI Pakem untuk membuat controller baru:
 
 ```bash
-lumina make:controller DashboardController
+canting make:controller DashboardController
 ```
 Perintah ini akan membuat file `src/app/controllers/dashboard_controller.rs` dan otomatis mendaftarkannya ke dalam `src/app/controllers/mod.rs`.
 
@@ -19,10 +19,10 @@ Perintah ini akan membuat file `src/app/controllers/dashboard_controller.rs` dan
 
 ## 2. Controller Halaman Web (View Rendering)
 
-Berikut adalah contoh penulisan controller standar produksi di Lumina. Perhatikan betapa bersih dan elegannya kode tanpa boilerplate:
+Berikut adalah contoh penulisan controller standar produksi di Pakem. Perhatikan betapa bersih dan elegannya kode tanpa boilerplate:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use axum::response::IntoResponse;
 use crate::app::models::user::User;
 
@@ -45,7 +45,7 @@ impl DashboardController {
 
         // Merender template Blade — Bersih, Human-Readable, Tanpa Tanda '&'
         View::make("dashboard.index")
-            .with("title", "Dashboard — Lumina")
+            .with("title", "Dashboard — Pakem")
             .with("user_id", user.sub.clone())
             .with("email", user.email.clone())
             .with("role", user.role.clone())
@@ -60,7 +60,7 @@ impl DashboardController {
 > 💡 **Tips:** Anda juga dapat menggunakan shortcut `req.view("dashboard.index")` yang ekuivalen dengan `View::make("dashboard.index")`:
 > ```rust
 > req.view("dashboard.index")
->     .with("title", "Dashboard — Lumina")
+>     .with("title", "Dashboard — Pakem")
 >     .render(&req)
 >     .await
 > ```
@@ -69,7 +69,7 @@ impl DashboardController {
 
 ## 3. Anatomi Unified `Request` Bundle
 
-Objek `Request` (`lumina::core::request::Request` atau via `lumina::prelude::*`) menyediakan akses langsung ke seluruh konteks aplikasi hanya dengan satu parameter:
+Objek `Request` (`pakem::core::request::Request` atau via `pakem::prelude::*`) menyediakan akses langsung ke seluruh konteks aplikasi hanya dengan satu parameter:
 
 | Method / Properti | Fungsi | Contoh Penggunaan |
 | :--- | :--- | :--- |
@@ -92,10 +92,10 @@ Objek `Request` (`lumina::core::request::Request` atau via `lumina::prelude::*`)
 
 ## 4. Menangani Form HTML dengan Auto-Validation (`ValidatedForm<T>`)
 
-Ketika menangani form web konvensional, Lumina menyediakan `ValidatedForm<T>` yang bekerja persis seperti validasi form di Laravel:
+Ketika menangani form web konvensional, Pakem menyediakan `ValidatedForm<T>` yang bekerja persis seperti validasi form di Laravel:
 
 1. Jika validasi **berhasil**, payload langsung siap digunakan.
-2. Jika validasi **gagal**, Lumina secara otomatis:
+2. Jika validasi **gagal**, Pakem secara otomatis:
    - Me-redirect user kembali ke halaman form sebelumnya (`Referer`).
    - Menyimpan seluruh pesan error ke dalam Session Flash `_errors`.
    - Menyimpan input lama ke dalam Session Flash `_old` (sehingga form tidak kosong kembali).
@@ -117,7 +117,7 @@ pub struct CreatePostRequest {
 
 ### B. Controller Handler
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use axum::response::IntoResponse;
 use crate::app::requests::create_post_request::CreatePostRequest;
 use crate::app::models::post::Post;
@@ -144,12 +144,12 @@ pub async fn store(
 
 ---
 
-## 5. Menangani RESTful API dengan `ValidatedJson<T>` & `LuminaResult`
+## 5. Menangani RESTful API dengan `ValidatedJson<T>` & `PakemResult`
 
-Untuk rute API JSON, handler mengembalikan `LuminaResult` (alias untuk `Result<Response, AppError>`). Objek `Request` memiliki serangkaian response helper instan:
+Untuk rute API JSON, handler mengembalikan `PakemResult` (alias untuk `Result<Response, AppError>`). Objek `Request` memiliki serangkaian response helper instan:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use crate::app::models::product::Product;
 use crate::app::requests::product_request::CreateProductRequest;
 
@@ -157,14 +157,14 @@ pub struct ApiProductController;
 
 impl ApiProductController {
     /// GET /api/products — Ambil daftar produk dengan pagination
-    pub async fn index(req: Request) -> LuminaResult {
+    pub async fn index(req: Request) -> PakemResult {
         let (page, per_page) = req.pagination();
         let paginator = Product::paginate(req.db(), page, per_page).await?;
         req.paginate(paginator)
     }
 
     /// GET /api/products/:id — Detail satu produk
-    pub async fn show(req: Request) -> LuminaResult {
+    pub async fn show(req: Request) -> PakemResult {
         let id = req.id_or_fail()?;
         match Product::find(req.db(), id).await? {
             Some(product) => req.ok(product),
@@ -176,7 +176,7 @@ impl ApiProductController {
     pub async fn store(
         req: Request,
         ValidatedJson(payload): ValidatedJson<CreateProductRequest>,
-    ) -> LuminaResult {
+    ) -> PakemResult {
         let mut product = Product {
             name: payload.name,
             price: payload.price,
@@ -192,7 +192,7 @@ impl ApiProductController {
     pub async fn update(
         req: Request,
         ValidatedJson(payload): ValidatedJson<CreateProductRequest>,
-    ) -> LuminaResult {
+    ) -> PakemResult {
         let id = req.id_or_fail()?;
         let mut product = match Product::find(req.db(), id).await? {
             Some(p) => p,
@@ -207,7 +207,7 @@ impl ApiProductController {
     }
 
     /// DELETE /api/products/:id — Hapus produk
-    pub async fn destroy(req: Request) -> LuminaResult {
+    pub async fn destroy(req: Request) -> PakemResult {
         let id = req.id_or_fail()?;
         if Product::destroy(req.db(), id).await? {
             req.success(serde_json::json!({ "id": id }), "Produk berhasil dihapus")
@@ -231,13 +231,13 @@ impl ApiProductController {
 
 ## 6. Upload Berkas Multipart (`req.storage()`)
 
-Lumina mempermudah penanganan berkas unggahan melalui abstraksi storage:
+Pakem mempermudah penanganan berkas unggahan melalui abstraksi storage:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use axum::extract::Multipart;
 
-pub async fn upload_avatar(req: Request, mut multipart: Multipart) -> LuminaResult {
+pub async fn upload_avatar(req: Request, mut multipart: Multipart) -> PakemResult {
     while let Some(field) = multipart.next_field().await.map_err(|e| AppError::BadRequest(e.to_string()))? {
         let name = field.name().unwrap_or("").to_string();
         if name == "avatar" {

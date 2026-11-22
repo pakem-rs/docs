@@ -2,11 +2,11 @@
 
 > *"Look like Laravel, Run at Rust Speed. Menghadirkan kecantikan Eloquent ORM Laravel dengan kecepatan raw Tokio & Axum tanpa overhead."*
 
-Selamat datang di **Modul 19 Dokumentasi Resmi Lumina Framework**! Pada modul ini, kita akan mempelajari serangkaian fitur tingkat lanjut dari Eloquent ORM Lumina:
+Selamat datang di **Modul 19 Dokumentasi Resmi Pakem Framework**! Pada modul ini, kita akan mempelajari serangkaian fitur tingkat lanjut dari Eloquent ORM Pakem:
 1. **Model Lifecycle Events & Observers (`ModelLifecycle` & `Observer<T>`)**
 2. **Auto Slug Generator & Unique Collision Resolver (`AutoSlug`)**
 3. **Auto Password Hashing Idempotent (`AutoHash`)**
-4. **Dedicated Seeder Class Runner (`lumina db:seed --class`) & `lumina make:seeder`**
+4. **Dedicated Seeder Class Runner (`canting db:seed --class`) & `canting make:seeder`**
 5. **Declarative Audit Trail Logging (`Audit::record`)**
 6. **Advanced Eloquent Query Builder (`chunk`, `update_or_create`)**
 
@@ -16,7 +16,7 @@ Selamat datang di **Modul 19 Dokumentasi Resmi Lumina Framework**! Pada modul in
 
 Di framework tradisional Rust, developer sering kali dipaksa menulis SQL manual atau berurusan dengan lifetime query yang rumit saat melakukan batch processing, pencatatan audit perubahan data, atau penanganan lifecycle hooks.
 
-Lumina menghadirkan sintaksis ekspresif dan deklaratif yang terasa akrab bagi developer Laravel/Rails, namun dikompilasi ke machine code Rust yang sangat aman (*memory-safe*) dan secepat kilat (*zero-cost abstractions*).
+Pakem menghadirkan sintaksis ekspresif dan deklaratif yang terasa akrab bagi developer Laravel/Rails, namun dikompilasi ke machine code Rust yang sangat aman (*memory-safe*) dan secepat kilat (*zero-cost abstractions*).
 
 ---
 
@@ -35,7 +35,7 @@ Trait `ModelLifecycle` menyediakan hook asinkron:
 Implementasikan trait `Observer<T>`:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use crate::app::models::Article;
 
 pub struct ArticleObserver;
@@ -71,11 +71,11 @@ impl Observer<Article> for ArticleObserver {
 
 ### Contoh Penggunaan:
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // 1. Slugify sederhana teks biasa
-let slug = AutoSlug::slugify("Panduan Belajar Rust & Lumina Framework 2026!");
-// Hasil: "panduan-belajar-rust-lumina-framework-2026"
+let slug = AutoSlug::slugify("Panduan Belajar Rust & Pakem Framework 2026!");
+// Hasil: "panduan-belajar-rust-pakem-2026"
 
 // 2. Slugify unik berbasis database
 // Jika "panduan-belajar-rust" sudah ada, otomatis menjadi "panduan-belajar-rust-1", "-2", dst.
@@ -92,7 +92,7 @@ let updated_slug = AutoSlug::generate(req.db(), "articles", &input_title, Some(a
 Mengamankan kata sandi pengguna dengan Bcrypt standar industri. `AutoHash` bersifat *idempotent*: jika string sudah merupakan hash Bcrypt valid (`$2b$`, `$2a$`, `$2y$`), `AutoHash` tidak akan melakukan double-hash.
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // Hashing kata sandi plain-text
 let hashed = AutoHash::bcrypt("rahasia123", 10)?;
@@ -108,19 +108,19 @@ if !AutoHash::is_hashed(&user.password) {
 
 ## 📜 5. Dedicated Seeder Class Runner
 
-Lumina memisahkan seeding database ke dalam class-class seeder independen ala Laravel.
+Pakem memisahkan seeding database ke dalam class-class seeder independen ala Laravel.
 
 ### A. Membuat Seeder Baru via CLI
 Gunakan perintah `make:seeder`:
 ```bash
-lumina make:seeder UserSeeder
-lumina make:seeder ProductSeeder
+canting make:seeder UserSeeder
+canting make:seeder ProductSeeder
 ```
 Perintah ini akan membuat file di `src/database/seeders/user_seeder.rs`.
 
 ### B. Struktur Class Seeder
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use crate::app::models::User;
 
 pub struct UserSeeder;
@@ -146,7 +146,7 @@ impl Seeder for UserSeeder {
 ### C. Mendaftarkan ke `DatabaseSeeder`
 Di `src/database/seeders/mod.rs`:
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 pub struct DatabaseSeeder;
 
@@ -164,11 +164,11 @@ impl Seeder for DatabaseSeeder {
 ### D. Menjalankan Seeder Spesifik via CLI
 ```bash
 # Menjalankan seluruh seeder (DatabaseSeeder utama)
-lumina db:seed
+canting db:seed
 
 # Menjalankan HANYA class seeder tertentu
-lumina db:seed --class UserSeeder
-lumina db:seed --class ProductSeeder
+canting db:seed --class UserSeeder
+canting db:seed --class ProductSeeder
 ```
 
 ---
@@ -179,7 +179,7 @@ Catat riwayat mutasi data secara transparan untuk keperluan compliance enterpris
 
 ### A. Mencatat Log Audit Baru
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use serde_json::json;
 
 Audit::record(req.db())
@@ -217,7 +217,7 @@ for log in history {
 Memproses jutaan baris data tanpa membebani RAM server (*out-of-memory prevention*).
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use crate::app::models::User;
 
 // Proses setiap 500 pengguna sekaligus secara streaming
@@ -248,4 +248,4 @@ let contact = Contact::query(req.db())
 ---
 
 ## 🎯 Kesimpulan
-Dengan kehadiran **Model Observers, AutoSlug, Dedicated Seeder Runner, Audit Trail, dan Advanced Eloquent Builder**, Lumina Framework semakin mengukuhkan posisinya sebagai backend framework modern terlengkap: **seindah Laravel, secepat Rust!**
+Dengan kehadiran **Model Observers, AutoSlug, Dedicated Seeder Runner, Audit Trail, dan Advanced Eloquent Builder**, Pakem Framework semakin mengukuhkan posisinya sebagai backend framework modern terlengkap: **seindah Laravel, secepat Rust!**

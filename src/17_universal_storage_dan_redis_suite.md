@@ -1,6 +1,6 @@
 # 📦 Modul 17: Universal Storage & Redis Multi-Driver Suite
 
-> *"Penyimpanan berkas universal dan ekosistem terdistribusi yang membebaskan aplikasi Lumina dari batasan single-server menuju skala cloud enterprise."*
+> *"Penyimpanan berkas universal dan ekosistem terdistribusi yang membebaskan aplikasi Pakem dari batasan single-server menuju skala cloud enterprise."*
 
 ---
 
@@ -10,7 +10,7 @@ Ketika aplikasi berpindah dari server tunggal menuju lingkungan multi-pod (Docke
 1. **Penyimpanan Berkas**: Disk lokal bersifat ephemeral (sementara). Berkas yang diunggah harus disimpan ke Object Storage (AWS S3, Cloudflare R2, MinIO, atau Google Cloud Storage).
 2. **Sinkronisasi Antar-Pod**: Cache memori lokal, antrean database tunggal, dan WebSocket in-memory tidak tersinkronisasi antar-server. **Redis** hadir sebagai message broker dan shared store performa tinggi berlatensi sub-milidetik.
 
-Lumina menghadirkan **Universal Storage Facade** dan **Redis Multi-Driver Suite** dengan sintaks yang sangat ergonomis ala Laravel.
+Pakem menghadirkan **Universal Storage Facade** dan **Redis Multi-Driver Suite** dengan sintaks yang sangat ergonomis ala Laravel.
 
 ---
 
@@ -36,7 +36,7 @@ AWS_BUCKET=hospital-records
 
 ### B. Penggunaan Melalui Global Facade
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // 1. Simpan berkas ke disk default
 Storage::put_file("documents/report.pdf", &pdf_bytes).await?;
@@ -57,7 +57,7 @@ Storage::disk_named("s3").delete("temp/cache.tmp").await?;
 ```
 
 ### C. Presigned Temporary URLs (AWS SigV4)
-Untuk berkas privat (seperti hasil scan rekam medis, invoice tagihan, atau laporan rahasia), Lumina menyediakan pembuatan **Presigned URL** berbatas waktu (*Time-To-Live*) secara instan dengan algoritma AWS Signature Version 4 (SigV4):
+Untuk berkas privat (seperti hasil scan rekam medis, invoice tagihan, atau laporan rahasia), Pakem menyediakan pembuatan **Presigned URL** berbatas waktu (*Time-To-Live*) secara instan dengan algoritma AWS Signature Version 4 (SigV4):
 
 ```rust
 use std::time::Duration;
@@ -71,7 +71,7 @@ println!("Akses aman: {}", secure_url);
 
 ### D. Penggunaan di Controller via `Request`
 ```rust
-pub async fn upload_avatar(req: Request) -> LuminaResult {
+pub async fn upload_avatar(req: Request) -> PakemResult {
     let file = req.file("avatar")?;
     
     // Simpan langsung ke S3 melalui helper storage
@@ -95,7 +95,7 @@ REDIS_URL="redis://127.0.0.1:6379/0"
 
 ### B. Penggunaan Facade `Cache`
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // 1. Simpan ke cache (TTL 3600 detik)
 Cache::put("user:profile:101", &user_data, 3600).await;
@@ -139,9 +139,9 @@ Worker akan secara otomatis mendeteksi konfigurasi `QUEUE_CONNECTION=redis` dan 
 
 ---
 
-## 📡 5. Lumina Echo Redis Pub/Sub Broadcaster
+## 📡 5. Pakem Echo Redis Pub/Sub Broadcaster
 
-Di lingkungan Kubernetes multi-pod, browser pengguna dapat terhubung ke Pod A sementara event broadcast dipicu dari Pod B. Dengan mengaktifkan `BROADCAST_DRIVER=redis`, seluruh pod Lumina saling terhubung via Redis Pub/Sub:
+Di lingkungan Kubernetes multi-pod, browser pengguna dapat terhubung ke Pod A sementara event broadcast dipicu dari Pod B. Dengan mengaktifkan `BROADCAST_DRIVER=redis`, seluruh pod Pakem saling terhubung via Redis Pub/Sub:
 
 ```ini
 BROADCAST_DRIVER=redis
@@ -152,4 +152,4 @@ Event yang dikirim dari controller:
 ```rust
 req.broadcast("orders", "OrderPlaced", json!({ "order_id": 42 })).await;
 ```
-Akan otomatis diteruskan ke seluruh pod Lumina dan diterima oleh client browser manapun di pod manapun secara real-time!
+Akan otomatis diteruskan ke seluruh pod Pakem dan diterima oleh client browser manapun di pod manapun secara real-time!

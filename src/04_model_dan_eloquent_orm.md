@@ -1,14 +1,14 @@
 # 📘 Modul 04: Model & Eloquent ORM
 
-Lumina menghadirkan **Human ORM** murni bergaya Laravel Eloquent di atas Rust. Menggabungkan kemudahan sintaks *Active Record* dengan kecepatan *zero-cost abstraction* dan *type-safety* Rust.
+Pakem menghadirkan **Human ORM** murni bergaya Laravel Eloquent di atas Rust. Menggabungkan kemudahan sintaks *Active Record* dengan kecepatan *zero-cost abstraction* dan *type-safety* Rust.
 
 ---
 
-## 1. Membuat Model & Migrasi (`lumina make:model`)
+## 1. Membuat Model & Migrasi (`canting make:model`)
 
 ```bash
 
-lumina make:model Product
+canting make:model Product
 
 ```
 
@@ -24,21 +24,21 @@ Perintah ini akan secara otomatis:
 
 ## 2. Menjalankan Migrasi Database
 
-Lumina memiliki migration runner otomatis yang mendukung **SQLite, PostgreSQL, MySQL, dan Microsoft SQL Server (MSSQL)**:
+Pakem memiliki migration runner otomatis yang mendukung **SQLite, PostgreSQL, MySQL, dan Microsoft SQL Server (MSSQL)**:
 
 ```bash
 
 # Menjalankan seluruh migrasi yang tertunda
 
-lumina migrate
+canting migrate
 
 # Memeriksa status migrasi yang telah diterapkan
 
-lumina migrate:status
+canting migrate:status
 
 # Membatalkan (rollback) migrasi terakhir
 
-lumina migrate:rollback
+canting migrate:rollback
 
 ```
 
@@ -66,14 +66,14 @@ CREATE TABLE IF NOT EXISTS products (
 
 ---
 
-## 3. Definisi Model dengan Makro `LuminaModel`
+## 3. Definisi Model dengan Makro `PakemModel`
 
-Model di Lumina didefinisikan menggunakan derive macro `#[derive(LuminaModel)]` yang sangat bersih dan ekspresif:
+Model di Pakem didefinisikan menggunakan derive macro `#[derive(PakemModel)]` yang sangat bersih dan ekspresif:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
-#[derive(Debug, Serialize, Deserialize, FromRow, Clone, Default, LuminaModel)]
+#[derive(Debug, Serialize, Deserialize, FromRow, Clone, Default, PakemModel)]
 #[table("products")]
 pub struct Product {
     pub id: i64,
@@ -87,13 +87,13 @@ pub struct Product {
 ```
 
 > [!NOTE]
-> Semua entitas model di Lumina menggunakan atribut deklaratif `#[table("nama_tabel")]`. Cukup dengan menyertakan field `deleted_at: Option<String>`, model otomatis mendukung fitur **Smart Soft Deletes** tanpa perlu konfigurasi tambahan.
+> Semua entitas model di Pakem menggunakan atribut deklaratif `#[table("nama_tabel")]`. Cukup dengan menyertakan field `deleted_at: Option<String>`, model otomatis mendukung fitur **Smart Soft Deletes** tanpa perlu konfigurasi tambahan.
 
 ---
 
 ## 4. Operasi CRUD Modern & Bersih (Unified Request)
 
-Seluruh controller di Lumina menggunakan satu parameter tunggal `req: Request` (Unified Request Bundle). Akses database dilakukan secara natural melalui `req.db()` tanpa extractor mentah Axum dan tanpa tanda ampersand `&` yang merepotkan:
+Seluruh controller di Pakem menggunakan satu parameter tunggal `req: Request` (Unified Request Bundle). Akses database dilakukan secara natural melalui `req.db()` tanpa extractor mentah Axum dan tanpa tanda ampersand `&` yang merepotkan:
 
 ### A. Create (Menambah Data Baru)
 ```rust
@@ -167,7 +167,7 @@ Product::query(req.db()).where_eq("id", 1).force_delete().await?;
 
 ## 5. Eloquent Fluent Query Builder
 
-Query builder Lumina dirancang chainable, lurus, dan ekspresif. Database pool dioper di awal via `Product::query(req.db())`, sehingga metode eksekusi akhir (`.get()`, `.first()`, `.paginate()`) bebas dari argumen tambahan:
+Query builder Pakem dirancang chainable, lurus, dan ekspresif. Database pool dioper di awal via `Product::query(req.db())`, sehingga metode eksekusi akhir (`.get()`, `.first()`, `.paginate()`) bebas dari argumen tambahan:
 
 ```rust
 // Ambil semua produk dengan harga > 5 juta, stok > 0, urutkan termurah, ambil 10 teratas
@@ -201,7 +201,7 @@ let paginator = Product::query(req.db())
 
 ## 6. Relasi Model (One-Line Relationships & Eager Loading)
 
-Lumina menghadirkan sintaks relasi **1-baris deklaratif** di dalam blok `impl Model`. Tidak ada lagi boilerplate fungsi relasi yang panjang dan rumit:
+Pakem menghadirkan sintaks relasi **1-baris deklaratif** di dalam blok `impl Model`. Tidak ada lagi boilerplate fungsi relasi yang panjang dan rumit:
 
 ### A. Definisi Relasi pada Model
 ```rust
@@ -246,15 +246,15 @@ let posts_with_authors = Post::query(req.db())
 
 ---
 
-## 7. Model Factory & Faker Engine (`lumina make:factory`)
+## 7. Model Factory & Faker Engine (`canting make:factory`)
 
-Lumina menyediakan sistem pembuatan data tiruan (*mock / seeding*) otomatis berkecepatan tinggi ala Laravel Factory dengan lokalisasi data Indonesia:
+Pakem menyediakan sistem pembuatan data tiruan (*mock / seeding*) otomatis berkecepatan tinggi ala Laravel Factory dengan lokalisasi data Indonesia:
 
 ### A. Membuat Factory Baru via CLI
 
 ```bash
 
-lumina make:factory UserFactory
+canting make:factory UserFactory
 
 ```
 
@@ -262,7 +262,7 @@ File `database/factories/user_factory.rs` akan dibuat secara otomatis:
 
 ```rust
 
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 use crate::app::models::user::User;
 
@@ -348,7 +348,7 @@ let mock_user = User::factory().make_one();
 
 ## 8. Dukungan Multi-Database & Microsoft SQL Server (MSSQL)
 
-Lumina Framework dirancang untuk bekerja secara seragam di berbagai engine database modern:
+Pakem Framework dirancang untuk bekerja secara seragam di berbagai engine database modern:
 
 - **SQLite**: Pilihan ideal untuk pengembangan lokal (*Zero-Config*).
 
@@ -360,7 +360,7 @@ Lumina Framework dirancang untuk bekerja secara seragam di berbagai engine datab
 
 ### A. Fitur Driver Microsoft SQL Server (MSSQL)
 
-Lumina mengintegrasikan driver TDS murni tanpa memerlukan instalasi driver C/ODBC tambahan:
+Pakem mengintegrasikan driver TDS murni tanpa memerlukan instalasi driver C/ODBC tambahan:
 
 1. **Auto-Translation Dialek T-SQL**:
 
@@ -432,7 +432,7 @@ ightarrow$ `IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = '...') CREATE T
 
 ### B. Format Connection String MSSQL (Universal Smart Parser)
 
-Lumina v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengenali dan mengonversi format connection string apa pun yang Anda tulis di file `.env`:
+Pakem v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengenali dan mengonversi format connection string apa pun yang Anda tulis di file `.env`:
 
 1. **Format JDBC — IP:Port Langsung (Paling Cepat / Direkomendasikan untuk Enterprise & Rumah Sakit)**:
    ```env
@@ -447,7 +447,7 @@ Lumina v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengen
    DATABASE_URL="jdbc:sqlserver://192.168.10.29\\SQL2012;user=sa;password=123;database=DBSIMRS;trustServerCertificate=true"
    ```
 
-3. **Format URL Standard (Otomatis Dikonversi oleh Lumina)**:
+3. **Format URL Standard (Otomatis Dikonversi oleh Pakem)**:
    ```env
    DATABASE_URL="sqlserver://sa:YourPassword123@localhost:1433?database=lumina_db&trustServerCertificate=true"
    ```
@@ -462,7 +462,7 @@ Lumina v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengen
 1. **Gunakan Mode Release saat Menjalankan Aplikasi**:
    Jalankan dengan `cargo run --release`. Pada mode debug standar Rust, verifikasi Bcrypt password memakan waktu ~300ms–600ms CPU. Pada mode release, proses tersebut teroptimasi penuh menjadi hanya **~15ms–25ms**.
 2. **Koneksi Pool Pre-Warmed Otomatis**:
-   Lumina secara default menginisialisasi minimal 2 koneksi aktif (`min_idle = 2`) di memori, sehingga request login pertama tidak perlu menanggung latensi handshake TCP dan autentikasi TLS TDS.
+   Pakem secara default menginisialisasi minimal 2 koneksi aktif (`min_idle = 2`) di memori, sehingga request login pertama tidak perlu menanggung latensi handshake TCP dan autentikasi TLS TDS.
 3. **Pastikan Kolom Pencarian Login Memiliki Index**:
    Pada tabel pengguna SIMRS yang besar, pastikan kolom `email` atau `username` memiliki index di SQL Server (`CREATE NONCLUSTERED INDEX IX_users_email ON users(email);`) agar proses lookup login instan tanpa table scan.
 
@@ -470,7 +470,7 @@ Lumina v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengen
 
 ## 9. Transaksi Database ACID Fluen (Zero-Ampersand, Zero-Pipes, Zero-Generics)
 
-Lumina menghadirkan sistem transaksi database ACID yang dirancang khusus untuk kenyamanan developer:
+Pakem menghadirkan sistem transaksi database ACID yang dirancang khusus untuk kenyamanan developer:
 
 - ❌ **Tanpa Tanda Ampersand `&tx`**: Tidak perlu meminjam (*borrowing*) transaksi secara rumit antar pemanggilan.
 
@@ -478,7 +478,7 @@ Lumina menghadirkan sistem transaksi database ACID yang dirancang khusus untuk k
 
 - ❌ **Tanpa Anotasi Turbofish `<>`**: Ekstraksi baris data berlangsung mulus dan transparan ke format JSON/nilai tanpa generic rumit yang membingungkan developer baru.
 
-Lumina menyediakan dua gaya penulisan transaksi yang sama-sama elegan dan bebas Anda pilih:
+Pakem menyediakan dua gaya penulisan transaksi yang sama-sama elegan dan bebas Anda pilih:
 
 ### A. Gaya 1: Direct Transaction Handle (`tx.table(...)`)
 
@@ -542,7 +542,7 @@ Anda juga dapat menggunakan facade `DB` yang familiar:
 
 ```rust
 
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // Menggunakan DB::begin
 
@@ -568,7 +568,7 @@ DB::transaction(req.db(), |tx| async move {
 
 ### D. Fitur Transaksi Lanjutan:
 
-1. **Auto-Rollback on Drop**: Jika sebuah transaksi keluar dari scope fungsi tanpa pernah memanggil `.commit().await?` (misalnya karena `?` return error lebih awal), Lumina secara otomatis membatalkan (*rollback*) seluruh perubahan di background secara non-blocking!
+1. **Auto-Rollback on Drop**: Jika sebuah transaksi keluar dari scope fungsi tanpa pernah memanggil `.commit().await?` (misalnya karena `?` return error lebih awal), Pakem secara otomatis membatalkan (*rollback*) seluruh perubahan di background secara non-blocking!
 
 2. **Savepoint & Partial Rollback**:
 
@@ -598,7 +598,7 @@ DB::transaction(req.db(), |tx| async move {
 
 ## 10. Smart Declarative Soft Deletes
 
-Lumina menyematkan dukungan **Soft Deletes** cerdas yang terintegrasi langsung dengan derive macro `#[derive(LuminaModel)]`:
+Pakem menyematkan dukungan **Soft Deletes** cerdas yang terintegrasi langsung dengan derive macro `#[derive(PakemModel)]`:
 
 ### A. Deklarasi Model
 
@@ -606,7 +606,7 @@ Cukup tambahkan field `deleted_at: Option<String>` pada struct Model Anda:
 
 ```rust
 
-#[derive(Debug, Serialize, Deserialize, FromRow, Clone, Default, LuminaModel)]
+#[derive(Debug, Serialize, Deserialize, FromRow, Clone, Default, PakemModel)]
 
 #[table("products")]
 

@@ -1,12 +1,12 @@
-# 🎨 Modul 14: Lumina Aurora Starter Kit
+# 🎨 Modul 14: Pakem Aurora Starter Kit
 
-**Lumina Aurora** adalah *official application starter kit* resmi untuk Lumina Framework yang dirancang dengan perpaduan sempurna antara keanggunan desain modern dan kecepatan komputasi ekstrem.
+**Pakem Aurora** adalah *official application starter kit* resmi untuk Pakem Framework yang dirancang dengan perpaduan sempurna antara keanggunan desain modern dan kecepatan komputasi ekstrem.
 
-Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tumpukan runtime JavaScript yang rumit (Node.js, Webpack, Vite bundler, Babel), Lumina Aurora menggunakan **Pure Native Blade Engine** yang dipadukan dengan **Tailwind CSS**. Menghasilkan halaman web yang memukau (*Beauty*), aman secara enterprise (*Safety*), dan memiliki kecepatan muat sub-milidetik (*Fast*).
+Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tumpukan runtime JavaScript yang rumit (Node.js, Webpack, Vite bundler, Babel), Pakem Aurora menggunakan **Pure Native Blade Engine** yang dipadukan dengan **Tailwind CSS**. Menghasilkan halaman web yang memukau (*Beauty*), aman secara enterprise (*Safety*), dan memiliki kecepatan muat sub-milidetik (*Fast*).
 
 ---
 
-## 🌟 1. Mengapa Lumina Aurora?
+## 🌟 1. Mengapa Pakem Aurora?
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -36,14 +36,14 @@ Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tum
 
 ## 🚀 2. Instalasi Cepat Satu Baris (`lumina aurora:install`)
 
-Anda dapat menginjeksi seluruh suite Lumina Aurora ke dalam proyek yang sudah ada hanya dengan satu perintah:
+Anda dapat menginjeksi seluruh suite Pakem Aurora ke dalam proyek yang sudah ada hanya dengan satu perintah:
 
 ```bash
 lumina aurora:install
 ```
 
 ### Apa yang Terjadi Saat Perintah Ini Dijalankan?
-CLI Lumina akan membangkitkan struktur file aplikasi secara otomatis:
+CLI Pakem akan membangkitkan struktur file aplikasi secara otomatis:
 * **Blade Views**:
   - `resources/views/aurora/layouts/guest.blade.rs` (Layout halaman autentikasi)
   - `resources/views/aurora/layouts/app.blade.rs` (Master layout dashboard dengan sidebar & navbar)
@@ -64,8 +64,8 @@ CLI Lumina akan membangkitkan struktur file aplikasi secara otomatis:
 Di dalam file rute aplikasi Anda (`src/routes/web.rs` atau `src/main.rs`), cukup kaitkan rute Aurora:
 
 ```rust
-use lumina::prelude::*;
-use lumina::http::aurora;
+use pakem::prelude::*;
+use pakem::http::aurora;
 
 pub fn app_routes() -> Router<AppState> {
     Router::new()
@@ -73,7 +73,7 @@ pub fn app_routes() -> Router<AppState> {
 }
 ```
 
-Rute yang disediakan oleh Lumina Aurora secara bawaan:
+Rute yang disediakan oleh Pakem Aurora secara bawaan:
 
 | HTTP Method | URI Path | Controller Handler | Deskripsi Fitur | Proteksi |
 | :---: | :--- | :--- | :--- | :---: |
@@ -92,7 +92,7 @@ Rute yang disediakan oleh Lumina Aurora secara bawaan:
 ## 🔐 4. Arsitektur Keamanan & Alur Autentikasi
 
 ### A. Proteksi Anti Brute-Force pada Login
-Handler login Lumina Aurora dilindungi oleh `BruteForceGuard` berbasis in-memory lock-free cache:
+Handler login Pakem Aurora dilindungi oleh `BruteForceGuard` berbasis in-memory lock-free cache:
 
 ```rust
 // Cek apakah IP atau Email sedang dalam status terkunci
@@ -132,7 +132,7 @@ req.audit_log(
 
 ## 🎨 5. Tampilan Dasbor & Komponen UI
 
-Dasbor Lumina Aurora menyajikan metrik performa aplikasi secara *real-time*:
+Dasbor Pakem Aurora menyajikan metrik performa aplikasi secara *real-time*:
 * **Statistik Cepat**: Total Pengguna Aktif, Throughput Permintaan (Requests/sec), Rata-rata Latensi Server (< 0.5ms), dan Penggunaan RAM Server (~18MB).
 * **Tabel Aktivitas Pengguna**: Riwayat transaksi atau aktivitas terbaru dengan format mata uang rupiah otomatis melalui pipeline Blade `&#123;&#123; $transaksi.total | rupiah &#125;&#125;`.
 * **Layout Responsif**: Sidebar dapat dilipat (*collapsible*) pada perangkat mobile dan desktop, memberikan ruang kerja maksimal.
@@ -141,7 +141,7 @@ Dasbor Lumina Aurora menyajikan metrik performa aplikasi secara *real-time*:
 
 ## 🧪 6. Pengujian Otomatis (Automated Tests)
 
-Lumina Aurora hadir dengan cakupan pengujian unit dan integrasi bawaan. Anda dapat menjalankan pengujian rute dan view rendering secara instan:
+Pakem Aurora hadir dengan cakupan pengujian unit dan integrasi bawaan. Anda dapat menjalankan pengujian rute dan view rendering secara instan:
 
 ```bash
 cargo test test_lumina_aurora
@@ -155,4 +155,4 @@ test test_lumina_aurora_routes_integration ... ok
 
 ---
 
-*Lumina Aurora: Starter kit elegan kelas dunia yang berjalan secepat kilat tanpa drama JavaScript.*
+*Pakem Aurora: Starter kit elegan kelas dunia yang berjalan secepat kilat tanpa drama JavaScript.*

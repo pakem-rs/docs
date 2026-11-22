@@ -1,23 +1,23 @@
 # 📘 Modul 10: Queue, Jobs & Scheduler
 
-Lumina Framework menyediakan sistem **Background Jobs** dan **Task Scheduler** untuk memproses tugas-tugas berat di latar belakang (seperti pengiriman email massal, ekspor laporan, dan sinkronisasi data) tanpa memblokir respons HTTP pengguna.
+Pakem Framework menyediakan sistem **Background Jobs** dan **Task Scheduler** untuk memproses tugas-tugas berat di latar belakang (seperti pengiriman email massal, ekspor laporan, dan sinkronisasi data) tanpa memblokir respons HTTP pengguna.
 
 ---
 
-## 1. Membuat Background Job (`lumina make:job`)
+## 1. Membuat Background Job (`canting make:job`)
 
-Gunakan CLI Lumina untuk membuat job baru:
+Gunakan CLI Pakem untuk membuat job baru:
 
 ```bash
-lumina make:job SendWelcomeEmailJob
+canting make:job SendWelcomeEmailJob
 ```
 File akan dibuat di `src/app/jobs/send_welcome_email_job.rs`:
 
 ```rust
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
-use lumina::core::queue::Job;
-use lumina::core::application::AppState;
+use pakem::core::queue::Job;
+use pakem::core::application::AppState;
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct SendWelcomeEmailJob {
@@ -46,7 +46,7 @@ impl Job for SendWelcomeEmailJob {
 Panggil method `req.state.queue.dispatch(...)` dari controller:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use axum::response::IntoResponse;
 
 pub async fn register_success(req: Request) -> impl IntoResponse {
@@ -76,10 +76,10 @@ Tugas-tugas antrean disimpan secara persisten di database (tabel `jobs`). Jika s
 
 ## 4. Penjadwalan Tugas Otomatis (Task Scheduler)
 
-Lumina menyediakan scheduler bawaan bergaya Cron. Daftarkan tugas berulang di `src/main.rs`:
+Pakem menyediakan scheduler bawaan bergaya Cron. Daftarkan tugas berulang di `src/main.rs`:
 
 ```rust
-use lumina::core::schedule::Scheduler;
+use pakem::core::schedule::Scheduler;
 
 let mut scheduler = Scheduler::new();
 

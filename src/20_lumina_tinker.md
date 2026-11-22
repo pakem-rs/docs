@@ -1,12 +1,12 @@
-# 🔮 Modul 20 — Lumina Tinker (Interactive CLI REPL Shell)
+# 🔮 Modul 20 — Pakem Tinker (Interactive CLI REPL Shell)
 
-> *"Look like Laravel, Run at Rust Speed. Menghadirkan konsol interaktif paling intuitif untuk berinteraksi langsung dengan aplikasi, database, dan service Lumina tanpa membuat route pengujian sementara."*
+> *"Look like Laravel, Run at Rust Speed. Menghadirkan konsol interaktif paling intuitif untuk berinteraksi langsung dengan aplikasi, database, dan service Pakem tanpa membuat route pengujian sementara."*
 
-Selamat datang di **Modul 20 Dokumentasi Resmi Lumina Framework**! Pada modul ini, kita akan mempelajari serba-serbi **Lumina Tinker**, alat bantu produktivitas berbasis REPL (*Read-Eval-Print Loop*) yang terinspirasi oleh `php artisan tinker` Laravel, namun dibangun dengan kekuatan native Rust.
+Selamat datang di **Modul 20 Dokumentasi Resmi Pakem Framework**! Pada modul ini, kita akan mempelajari serba-serbi **Pakem Tinker**, alat bantu produktivitas berbasis REPL (*Read-Eval-Print Loop*) yang terinspirasi oleh `php artisan tinker` Laravel, namun dibangun dengan kekuatan native Rust.
 
 ---
 
-## 🌟 1. Mengapa Lumina Tinker?
+## 🌟 1. Mengapa Pakem Tinker?
 
 Dalam siklus pengembangan backend, developer sering kali perlu:
 - Memeriksa record di database secara cepat.
@@ -17,24 +17,24 @@ Dalam siklus pengembangan backend, developer sering kali perlu:
 Alih-alih membuat route sementara di `routes/web.rs` lalu membuka browser, Anda cukup membuka terminal dan mengetik:
 
 ```bash
-lumina tinker
+canting tinker
 ```
 
 ---
 
-## 🚀 2. Memulai Sesi Lumina Tinker
+## 🚀 2. Memulai Sesi Pakem Tinker
 
 Pastikan file konfigurasi `.env` proyek Anda telah memiliki variabel `DATABASE_URL` aktif, lalu jalankan:
 
 ```bash
-lumina tinker
+canting tinker
 ```
 
 Anda akan disambut oleh banner interaktif:
 
 ```text
 =========================================================
-   ⚡ Lumina Framework — Interactive Tinker Shell (REPL)   
+   ⚡ Pakem Framework — Interactive Tinker Shell (REPL)   
 =========================================================
 📦 [Database] Terhubung ke basis data: PostgreSQL
 Ketik 'help' untuk daftar perintah, 'exit' atau Ctrl+D untuk keluar.
@@ -46,7 +46,7 @@ lumina >
 
 ## 🗄️ 3. Query Model Eloquent
 
-Lumina Tinker memahami sintaksis model Lumina secara otomatis:
+Pakem Tinker memahami sintaksis model Pakem secara otomatis:
 
 ### A. Mengambil Semua Record (`Model::all()`)
 ```rust
@@ -120,7 +120,7 @@ lumina > UPDATE users SET role = 'editor' WHERE id = 2;
 
 ## 🔐 6. Helper & Security Facades
 
-Lumina Tinker menyertakan shortcut evaluator untuk fungsi-fungsi utilitas:
+Pakem Tinker menyertakan shortcut evaluator untuk fungsi-fungsi utilitas:
 
 ### A. Bcrypt Password Hashing (`Hash::make` & `Hash::check`)
 ```rust
@@ -157,7 +157,7 @@ lumina > Uuid::new()
 | `env` | Menampilkan variabel lingkungan `.env` dengan masking sensor pada password/key. |
 | `help` | Menampilkan ringkasan seluruh perintah bawaan Tinker. |
 | `clear` | Membersihkan layar terminal. |
-| `exit` / `quit` / `Ctrl+D` | Keluar dari sesi Lumina Tinker. |
+| `exit` / `quit` / `Ctrl+D` | Keluar dari sesi Pakem Tinker. |
 
 ---
 

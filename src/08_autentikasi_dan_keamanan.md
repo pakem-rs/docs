@@ -1,28 +1,28 @@
 # 📘 Modul 08: Autentikasi & Keamanan
 
-Lumina Framework menyediakan sistem keamanan ganda (**Dual Authentication Suite**) yang mencakup autentikasi berbasis **Session/Cookie** untuk aplikasi web tradisional, serta **JSON Web Token (JWT)** untuk API mobile/frontend modern.
+Pakem Framework menyediakan sistem keamanan ganda (**Dual Authentication Suite**) yang mencakup autentikasi berbasis **Session/Cookie** untuk aplikasi web tradisional, serta **JSON Web Token (JWT)** untuk API mobile/frontend modern.
 
 ---
 
-## 1. Scaffolding Autentikasi Instan (`lumina make:auth`)
+## 1. Scaffolding Autentikasi Instan (`canting make:auth`)
 
 Buat modul registrasi, login, logout, dan dashboard siap pakai hanya dengan satu perintah:
 
 ```bash
-lumina make:auth
+canting make:auth
 ```
 Perintah ini akan secara otomatis membuat:
 - Controller: `src/app/controllers/auth_controller.rs`
 - Model & Migrasi: `User` model dengan hashing password
 - Halaman View Blade: `resources/views/auth/login.blade.rs`, `register.blade.rs`, dan `dashboard.blade.rs`.
 
-> **Catatan:** Untuk starter kit autentikasi & dashboard modern berbasis Tailwind CSS dan Pure Blade dengan proteksi Anti Brute-Force & Audit Trail, gunakan **[Lumina Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)** (`lumina aurora:install`).
+> **Catatan:** Untuk starter kit autentikasi & dashboard modern berbasis Tailwind CSS dan Pure Blade dengan proteksi Anti Brute-Force & Audit Trail, gunakan **[Pakem Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)** (`lumina aurora:install`).
 
 ---
 
 ## 2. Password Hashing (Bcrypt)
 
-Lumina menggunakan algoritma hashing **Bcrypt** standar industri:
+Pakem menggunakan algoritma hashing **Bcrypt** standar industri:
 
 ```rust
 use bcrypt::{hash, verify, DEFAULT_COST};
@@ -44,8 +44,8 @@ if is_valid {
 
 ### A. Model Pengguna Terautentikasi (`AuthUser`)
 ```rust
-use lumina::core::auth::AuthUser;
-use lumina::http::auth::{generate_token, validate_token};
+use pakem::core::auth::AuthUser;
+use pakem::http::auth::{generate_token, validate_token};
 
 // 1. Buat instance AuthUser setelah login sukses (berlaku 24 jam)
 let user = AuthUser::new(
@@ -61,11 +61,11 @@ let token = generate_token(&user)?;
 ```
 
 ### B. Memproteksi Endpoint dengan `AuthUser` Extractor
-Cukup letakkan `auth_user: AuthUser` di parameter fungsi controller Anda. Lumina akan otomatis memvalidasi header `Authorization: Bearer <token>`:
+Cukup letakkan `auth_user: AuthUser` di parameter fungsi controller Anda. Pakem akan otomatis memvalidasi header `Authorization: Bearer <token>`:
 
 ```rust
 use axum::Json;
-use lumina::core::auth::AuthUser;
+use pakem::core::auth::AuthUser;
 
 pub async fn profile(auth_user: AuthUser) -> Json<serde_json::Value> {
     Json(serde_json::json!({
@@ -118,12 +118,12 @@ Sembunyikan atau tampilkan elemen navigasi berdasarkan status login:
 
 ---
 
-## 6. Lumina Shield Security Audit (`lumina audit`)
+## 6. Pakem Shield Security Audit (`canting audit`)
 
-Sebelum melakukan deployment ke server produksi, Lumina menyediakan alat audit keamanan otomatis:
+Sebelum melakukan deployment ke server produksi, Pakem menyediakan alat audit keamanan otomatis:
 
 ```bash
-lumina audit
+canting audit
 ```
 
 ### Lingkup Pemeriksaan Otomatis:
@@ -138,7 +138,7 @@ lumina audit
 ## 7. Ekosistem Keamanan Tingkat Lanjut & Starter Kit
 
 Untuk implementasi keamanan tingkat lanjut dan starter kit siap pakai:
-- **[Modul 14: Lumina Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)**: Paket autentikasi & dashboard elegan dengan Pure Blade + Tailwind CSS (`lumina aurora:install`).
+- **[Modul 14: Pakem Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)**: Paket autentikasi & dashboard elegan dengan Pure Blade + Tailwind CSS (`lumina aurora:install`).
 - **[Modul 15: Enterprise Security & Zero-Panic Safety](./15_enterprise_security_dan_zero_panic.md)**: Zero-Panic Error Boundary (`catch_unwind`), Anti Brute-Force lockout cache, OWASP security headers, dan audit trail ISO 27001.
 
 ---

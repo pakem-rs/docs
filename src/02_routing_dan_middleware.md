@@ -8,11 +8,11 @@ Modul ini membahas cara mendefinisikan rute web dan API serta menambahkan lapisa
 
 Semua rute web didaftarkan di file `src/routes/web.rs`, sedangkan endpoint API di `src/routes/api.rs`.
 
-Lumina menyediakan metode HTTP standar yang intuitif:
+Pakem menyediakan metode HTTP standar yang intuitif:
 
 ```rust
 use axum::{response::Html, routing::{get, post, put, delete}, Router};
-use lumina::core::application::AppState;
+use pakem::core::application::AppState;
 
 pub fn router() -> Router<AppState> {
     Router::new()
@@ -27,7 +27,7 @@ pub fn router() -> Router<AppState> {
 }
 
 async fn welcome_handler() -> Html<&'static str> {
-    Html("<h1>Selamat Datang di Lumina Framework!</h1>")
+    Html("<h1>Selamat Datang di Pakem Framework!</h1>")
 }
 ```
 
@@ -75,11 +75,11 @@ pub fn router() -> Router<AppState> {
 
 ---
 
-## 4. Middleware di Lumina
+## 4. Middleware di Pakem
 
 Middleware bertindak sebagai lapisan filter sebelum request mencapai controller handler atau sesudah response dihasilkan.
 
-### A. Middleware Bawaan Lumina
+### A. Middleware Bawaan Pakem
 1. **Security Headers Middleware**: Otomatis menyuntikkan header keamanan modern:
    - `X-Frame-Options: SAMEORIGIN` (mencegah Clickjacking)
    - `X-Content-Type-Options: nosniff` (mencegah MIME confusion)
@@ -133,7 +133,7 @@ pub fn admin_routes() -> Router<AppState> {
 
 ## 5. Proteksi CSRF (Cross-Site Request Forgery)
 
-Untuk semua request formulir web (`POST`, `PUT`, `DELETE`), Lumina menyediakan helper direktif Blade `@csrf`:
+Untuk semua request formulir web (`POST`, `PUT`, `DELETE`), Pakem menyediakan helper direktif Blade `@csrf`:
 
 ```html
 <form method="POST" action="/profile/update">

@@ -1,9 +1,9 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Lumina Framework',
+  title: 'Pakem Framework',
   description: 'Look like Laravel, Run at Rust Speed. Batteries-included web framework for Rust.',
-  base: '/docs/',
+  base: '/',
   cleanUrls: true,
   lastUpdated: true,
 
@@ -11,12 +11,12 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['meta', { name: 'theme-color', content: '#6366f1' }],
     ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:title', content: 'Lumina Framework — Look like Laravel, Run at Rust Speed' }],
+    ['meta', { name: 'og:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
     ['meta', { name: 'og:description', content: 'Web framework Rust modern dengan Developer Experience termanis, performa raw speed, dan keamanan enterprise.' }],
   ],
 
   themeConfig: {
-    siteTitle: '⚡ Lumina Framework',
+    siteTitle: '⚡ Pakem Framework',
     
     search: {
       provider: 'local',
@@ -51,13 +51,13 @@ export default defineConfig({
       {
         text: 'Ekosistem',
         items: [
-          { text: 'Lumina Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
+          { text: 'Pakem Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
           { text: 'WASM Plugins', link: '/06_wasm_sandbox_dan_plugin' },
           { text: 'Indonesian Script (.is)', link: '/07_indonesian_script' },
-          { text: 'Lumina Telescope', link: '/11_observabilitas_dan_telescope' },
+          { text: 'Pakem Telescope', link: '/11_observabilitas_dan_telescope' },
         ]
       },
-      { text: 'v1.0.0 (LTS)', link: 'https://github.com/lumina-java/framework/releases' }
+      { text: 'v1.0.0 (LTS)', link: 'https://github.com/pakem-rs/framework/releases' }
     ],
 
     sidebar: [
@@ -93,14 +93,14 @@ export default defineConfig({
       {
         text: '🎨 Official Starter Kits & UI',
         items: [
-          { text: '14. Lumina Aurora Starter Kit', link: '/14_lumina_aurora_starter_kit' },
-          { text: '13. Lumina Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
+          { text: '14. Pakem Aurora Starter Kit', link: '/14_lumina_aurora_starter_kit' },
+          { text: '13. Pakem Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
         ]
       },
       {
         text: '⚡ Fitur Lanjutan (Advanced)',
         items: [
-          { text: '20. Lumina Tinker (Interactive REPL)', link: '/20_lumina_tinker' },
+          { text: '20. Pakem Tinker (Interactive REPL)', link: '/20_lumina_tinker' },
           { text: '21. Dynamic WASM & Hot-Reload', link: '/21_wasm_plugins_hot_reload' },
           { text: '06. WASM Sandbox & Plugin', link: '/06_wasm_sandbox_dan_plugin' },
           { text: '07. Indonesian Script (.is)', link: '/07_indonesian_script' },
@@ -115,8 +115,8 @@ export default defineConfig({
         text: '🤖 AI Ecosystem & Hardware Bridge',
         items: [
           { text: '22. AI Context & Agent Skills', link: '/22_ai_agent_context_and_skills' },
-          { text: '23. Lumina Hardware Bridge', link: '/23_lumina_hardware_bridge' },
-          { text: '24. Lumina Desktop Engine', link: '/24_lumina_desktop_engine' },
+          { text: '23. Pakem Hardware Bridge', link: '/23_lumina_hardware_bridge' },
+          { text: '24. Pakem Desktop Engine', link: '/24_lumina_desktop_engine' },
         ]
       },
       {
@@ -129,12 +129,12 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/lumina-java' }
+      { icon: 'github', link: 'https://github.com/pakem-rs' }
     ],
 
     footer: {
       message: 'Dirilis di bawah Lisensi MIT. Look like Laravel, Run at Rust Speed.',
-      copyright: 'Copyright © 2026 Lumina Framework Core Team'
+      copyright: 'Copyright © 2026 Pakem Framework Core Team'
     },
 
     docFooter: {

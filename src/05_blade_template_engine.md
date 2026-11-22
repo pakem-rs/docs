@@ -1,6 +1,6 @@
 # 📘 Modul 05: Blade Template Engine
 
-Lumina mengadopsi sintaks **Laravel Blade** murni secara native di Rust (`resources/views/**/*.blade.rs`). Engine Blade di Lumina berjalan tanpa ketergantungan runtime berat, mendukung caching otomatis, pipeline filter berantai, dan delegasi ke plugin WASM Sandbox.
+Pakem mengadopsi sintaks **Laravel Blade** murni secara native di Rust (`resources/views/**/*.blade.rs`). Engine Blade di Pakem berjalan tanpa ketergantungan runtime berat, mendukung caching otomatis, pipeline filter berantai, dan delegasi ke plugin WASM Sandbox.
 
 ---
 
@@ -25,7 +25,7 @@ Gunakan tanda seru ganda `{!! ... !!}` jika Anda ingin mencetak konten HTML ment
 
 ## 2. Pewarisan Layout (Layout Inheritance)
 
-Lumina Blade mendukung struktur template bertingkat menggunakan `@extends`, `@section`, dan `@yield`.
+Pakem Blade mendukung struktur template bertingkat menggunakan `@extends`, `@section`, dan `@yield`.
 
 ### Layout Induk (`resources/views/layouts/app.blade.rs`):
 ```html
@@ -33,7 +33,7 @@ Lumina Blade mendukung struktur template bertingkat menggunakan `@extends`, `@se
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title') - Lumina App</title>
+    <title>@yield('title') - Pakem App</title>
 </head>
 <body class="bg-slate-900 text-white">
     <nav>
@@ -45,7 +45,7 @@ Lumina Blade mendukung struktur template bertingkat menggunakan `@extends`, `@se
     </main>
 
     <footer>
-        <p>&copy; 2026 Lumina Framework</p>
+        <p>&copy; 2026 Pakem Framework</p>
     </footer>
 </body>
 </html>
@@ -151,7 +151,7 @@ Lumina Blade mendukung struktur template bertingkat menggunakan `@extends`, `@se
 
 ## 6. Pipeline Filter Berantai
 
-Lumina Blade mendukung operator pipa `|` untuk mentransformasi teks secara berurutan:
+Pakem Blade mendukung operator pipa `|` untuk mentransformasi teks secara berurutan:
 
 ```html
 <!-- Format Mata Uang Rupiah -->
@@ -190,7 +190,7 @@ Eksekusi logika perhitungan skrip Indonesian Script (`.is`) tanpa reload server:
 Untuk merender template Blade dari Controller, gunakan builder `View::make(...)` atau `req.view(...)`:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 use axum::response::IntoResponse;
 use crate::app::models::user::User;
 
@@ -200,7 +200,7 @@ pub async fn show_dashboard(req: Request) -> impl IntoResponse {
 
     // Sintaks bebas ampersand (&) yang bersih dan mudah diketik
     View::make("dashboard.index")
-        .with("title", "Dashboard — Lumina")
+        .with("title", "Dashboard — Pakem")
         .with("users", users)
         .with("is_admin", is_admin)
         .render(req)

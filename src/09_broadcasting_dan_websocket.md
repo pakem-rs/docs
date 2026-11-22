@@ -1,12 +1,12 @@
-# 📘 Modul 09: Broadcasting & WebSocket (Lumina Echo)
+# 📘 Modul 09: Broadcasting & WebSocket (Pakem Echo)
 
-**Lumina Echo** menyediakan server WebSocket real-time terintegrasi untuk menangani notifikasi langsung, obrolan (*live chat*), dasbor dinamis, dan pembaruan data instan tanpa polling HTTP.
+**Pakem Echo** menyediakan server WebSocket real-time terintegrasi untuk menangani notifikasi langsung, obrolan (*live chat*), dasbor dinamis, dan pembaruan data instan tanpa polling HTTP.
 
 ---
 
-## 1. Arsitektur Channel Lumina Echo
+## 1. Arsitektur Channel Pakem Echo
 
-Lumina Echo membagi siaran ke dalam tiga kategori channel:
+Pakem Echo membagi siaran ke dalam tiga kategori channel:
 
 1. **Public Channel** (misal: `news`, `announcements`): Dapat didengarkan oleh siapa saja tanpa perlu otorisasi atau login.
 2. **Private Channel** (awalan `private-`, misal: `private-user-42`): Memerlukan verifikasi token JWT dan hak akses sebelum client dapat mendengarkan (*subscribe*).
@@ -20,7 +20,7 @@ Buat event yang mengimplementasikan trait `ShouldBroadcast`:
 
 ```rust
 use serde::Serialize;
-use lumina::core::echo::ShouldBroadcast;
+use pakem::core::echo::ShouldBroadcast;
 
 #[derive(Serialize)]
 pub struct OrderShippedEvent {
@@ -52,12 +52,12 @@ impl ShouldBroadcast for OrderShippedEvent {
 Cukup panggil method `req.state.echo.broadcast(&event)`:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 pub async fn ship_order(
     req: Request,
     ValidatedJson(payload): ValidatedJson<ShipRequest>,
-) -> LuminaResult {
+) -> PakemResult {
     let event = OrderShippedEvent {
         order_id: payload.order_id,
         tracking_number: "RESI-123456".to_string(),
@@ -85,7 +85,7 @@ state.echo.authorize_channel("private-user-*", |channel_name: &str, token: Optio
     };
 
     // Validasi token JWT
-    let auth_user = match lumina::http::auth::validate_token(token) {
+    let auth_user = match pakem::http::auth::validate_token(token) {
         Ok(u) => u,
         Err(_) => return false,
     };

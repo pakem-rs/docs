@@ -1,12 +1,12 @@
 # 📘 Modul 01: Persyaratan Sistem & Instalasi
 
-Selamat datang di dokumentasi resmi **Lumina Framework**! Modul ini membahas semua hal yang Anda butuhkan untuk memulai pengembangan aplikasi dengan Lumina dari awal.
+Selamat datang di dokumentasi resmi **Pakem Framework**! Modul ini membahas semua hal yang Anda butuhkan untuk memulai pengembangan aplikasi dengan Pakem dari awal.
 
 ---
 
 ## 1. Persyaratan Sistem (System Requirements)
 
-Sebelum menggunakan Lumina, pastikan sistem komputer Anda telah terpasang:
+Sebelum menggunakan Pakem, pastikan sistem komputer Anda telah terpasang:
 
 - **Rust Compiler & Cargo**: Versi **1.75+** (Stable).
   - Cek versi: `rustc --version` dan `cargo --version`
@@ -23,18 +23,18 @@ Sebelum menggunakan Lumina, pastikan sistem komputer Anda telah terpasang:
 
 ---
 
-## 2. Instalasi Lumina CLI (`lumina-cli`)
+## 2. Instalasi Pakem CLI (`canting`)
 
-Lumina dilengkapi dengan toolchain Command Line Interface (CLI) bawaan yang elegan dan canggih bernama `lumina`.
+Pakem dilengkapi dengan toolchain Command Line Interface (CLI) bawaan yang elegan dan canggih bernama `lumina`.
 
 ### Cara 1: Pasang Global via Crates.io
 ```bash
-cargo install lumina-cli --force
+cargo install canting --force
 ```
 
 ### Cara 2: Pasang Langsung dari Repositori GitHub Resmi
 ```bash
-cargo install --git https://github.com/lumina-java/framework.git lumina-cli --force
+cargo install --git https://github.com/pakem-rs/framework.git canting --force
 ```
 
 Setelah instalasi selesai, verifikasi dengan menjalankan:
@@ -49,55 +49,55 @@ lumina upgrade
 ```
 
 ### Cara 4: Instalasi Lokal dari Source Code
-Jika Anda berkontribusi atau memodifikasi source code Lumina:
+Jika Anda berkontribusi atau memodifikasi source code Pakem:
 ```bash
 # Clone repositori framework
-git clone https://github.com/lumina-java/framework.git
+git clone https://github.com/pakem-rs/framework.git
 cd framework
 
 # Install biner CLI ke lingkungan Cargo lokal
-cargo install --path lumina-cli --force
+cargo install --path canting --force
 ```
 
 ---
 
-## 3. Membuat Proyek Baru (`lumina new`)
+## 3. Membuat Proyek Baru (`canting new`)
 
-Lumina menyediakan flag `--db` untuk mengonfigurasi driver database dan file `.env` secara instan, serta memangkas waktu kompilasi `cargo build` awal hingga **45%**.
+Pakem menyediakan flag `--db` untuk mengonfigurasi driver database dan file `.env` secara instan, serta memangkas waktu kompilasi `cargo build` awal hingga **45%**.
 
 ### Opsi A: SQLite (Tercepat, Zero-Config)
 ```bash
-lumina new my-blog --db sqlite
+canting new my-blog --db sqlite
 ```
 > Otomatis membuat file `database.sqlite` dan menyiapkan dependensi SQLite yang ramping.
 
 ### Opsi B: PostgreSQL (Production Ready)
 ```bash
-lumina new enterprise-app --db postgres
+canting new enterprise-app --db postgres
 ```
 > Menyiapkan driver PostgreSQL berkinerja tinggi dan template koneksi standard.
 
 ### Opsi C: MySQL / MariaDB
 ```bash
-lumina new store-app --db mysql
+canting new store-app --db mysql
 ```
 
 ### Opsi D: Microsoft SQL Server (MSSQL Enterprise)
 ```bash
-lumina new enterprise-app --db mssql
+canting new enterprise-app --db mssql
 ```
 > Menyiapkan driver pure-Rust TDS Tiberius berkecepatan tinggi tanpa memerlukan instalasi driver ODBC Microsoft eksternal di sistem operasi.
 
 ### Opsi E: Multi-Driver (Semua Driver Aktif)
 ```bash
-lumina new portal-app --db all
+canting new portal-app --db all
 ```
 
 ---
 
 ## 4. Struktur Direktori Proyek
 
-Lumina menerapkan arsitektur **Model-View-Controller (MVC)** yang terorganisir rapi dan intuitif:
+Pakem menerapkan arsitektur **Model-View-Controller (MVC)** yang terorganisir rapi dan intuitif:
 
 ```text
 my-app/
@@ -117,7 +117,7 @@ my-app/
 ├── src/
 │   ├── app/
 │   │   ├── controllers/     # Controller handlers HTTP
-│   │   ├── models/          # Model data (LuminaModel derive)
+│   │   ├── models/          # Model data (PakemModel derive)
 │   │   ├── requests/        # Validasi Form/JSON request
 │   │   └── services/        # Business logic layer
 │   ├── routes/
@@ -141,7 +141,7 @@ File `.env` otomatis digenerate saat project dibuat. Contoh konfigurasi SQLite:
 
 ```env
 # Pengaturan Aplikasi
-APP_NAME=Lumina
+APP_NAME=Pakem
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://localhost:8000
@@ -173,14 +173,14 @@ cd my-blog
 
 ### Menjalankan Server Standar:
 ```bash
-lumina serve
+canting serve
 # atau langsung menggunakan: cargo run
 ```
 
 ### Menjalankan Server dengan Auto-Reload (Hot-Reloading):
 Jika Anda menginstal `cargo-watch`, server akan otomatis restart setiap kali Anda menyimpan perubahan kode:
 ```bash
-lumina watch
+canting watch
 ```
 
 Buka browser Anda dan akses:

@@ -1,6 +1,6 @@
 # 🛡️ Modul 15: Enterprise Security & Zero-Panic Safety
 
-Keamanan dan keandalan sistem adalah prioritas tertinggi dalam pengembangan aplikasi berskala enterprise, perbankan, dan pemerintahan. Lumina Framework menghadirkan arsitektur keamanan tingkat lanjut (*Enterprise Grade Security*) serta mekanisme **Zero-Panic Safety Boundary** guna memastikan server tidak akan pernah tumbang (*zero-crash*) dalam kondisi apa pun.
+Keamanan dan keandalan sistem adalah prioritas tertinggi dalam pengembangan aplikasi berskala enterprise, perbankan, dan pemerintahan. Pakem Framework menghadirkan arsitektur keamanan tingkat lanjut (*Enterprise Grade Security*) serta mekanisme **Zero-Panic Safety Boundary** guna memastikan server tidak akan pernah tumbang (*zero-crash*) dalam kondisi apa pun.
 
 ---
 
@@ -8,7 +8,7 @@ Keamanan dan keandalan sistem adalah prioritas tertinggi dalam pengembangan apli
 
 Di ekosistem server backend konvensional, terjadinya eksekusi `panic!` yang tidak tertangani pada sebuah thread request dapat merusak status worker atau bahkan mematikan proses server secara mendadak (*crash*).
 
-Lumina mengimplementasikan **Zero-Panic Safety Boundary** di tingkat middleware global menggunakan `std::panic::AssertUnwindSafe`.
+Pakem mengimplementasikan **Zero-Panic Safety Boundary** di tingkat middleware global menggunakan `std::panic::AssertUnwindSafe`.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -38,7 +38,7 @@ Lumina mengimplementasikan **Zero-Panic Safety Boundary** di tingkat middleware 
 Anda dapat mengaktifkan proteksi ini pada seluruh rute atau grup rute tertentu:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 pub fn router() -> Router<AppState> {
     Router::new()
@@ -56,13 +56,13 @@ Ketika handler mengalami panic tak terduga (misalnya dereferensi `None` atau kes
 
 ## 🔐 2. Granular Role-Based Access Control (RBAC)
 
-Lumina menyediakan sistem hak akses dan peran (*Role & Permission*) deklaratif yang terintegrasi secara harmonis antara Model, Controller, Router, dan View Blade.
+Pakem menyediakan sistem hak akses dan peran (*Role & Permission*) deklaratif yang terintegrasi secara harmonis antara Model, Controller, Router, dan View Blade.
 
 ### A. Trait `HasRolesAndPermissions`
 Setiap model pengguna atau token API mengimplementasikan trait ini:
 
 ```rust
-use lumina::core::auth::HasRolesAndPermissions;
+use pakem::core::auth::HasRolesAndPermissions;
 
 // Memeriksa izin spesifik
 if user.has_permission("users.create") {
@@ -88,13 +88,13 @@ Router::new()
     .can("users.view")          // Hanya user dengan izin 'users.view' yang boleh masuk
     .has_role("administrator"); // Wajib memiliki peran 'administrator'
 ```
-Jika pengguna tidak memiliki wewenang, Lumina langsung menolak akses dengan respons **HTTP 403 Forbidden**.
+Jika pengguna tidak memiliki wewenang, Pakem langsung menolak akses dengan respons **HTTP 403 Forbidden**.
 
 ### C. Otorisasi Kontekstual di Controller (`req.authorize`)
 Gunakan shortcut otorisasi satu baris pada Unified `Request` bundle:
 
 ```rust
-pub async fn destroy(req: Request) -> LuminaResult {
+pub async fn destroy(req: Request) -> PakemResult {
     // 1-baris otorisasi: otomatis return HTTP 403 jika user tidak berhak
     req.authorize("users.delete")?;
 
@@ -153,7 +153,7 @@ if state.brute_force.is_locked(&lockout_key).await {
 
 Penyerang dapat menebak secret key, API token, atau kata sandi dengan mengukur selisih nanodetik waktu respons perbandingan string (*Side-Channel Timing Attacks*).
 
-Lumina mengamankan seluruh verifikasi sensitif dengan fungsi perbandingan konstan berbasis library `subtle`:
+Pakem mengamankan seluruh verifikasi sensitif dengan fungsi perbandingan konstan berbasis library `subtle`:
 
 ```rust
 use subtle::ConstantTimeEq;
@@ -171,7 +171,7 @@ Instruksi ini memastikan waktu komparasi bit selalu bernilai konstan, menggagalk
 
 ## 🌐 5. Comprehensive Security Headers (OWASP Standard)
 
-Lumina secara otomatis menyematkan header keamanan esensial sesuai panduan OWASP:
+Pakem secara otomatis menyematkan header keamanan esensial sesuai panduan OWASP:
 
 ```rust
 Router::new()
@@ -226,4 +226,4 @@ Audit log dicatat dalam format JSON terstruktur yang siap dikirimkan ke SIEM (*E
 
 ---
 
-*Lumina Enterprise Security: Perisai baja tangguh untuk aplikasi misi kritis Anda.*
+*Pakem Enterprise Security: Perisai baja tangguh untuk aplikasi misi kritis Anda.*

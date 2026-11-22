@@ -1,12 +1,12 @@
 # 🤖 Modul 22: AI-Ready Architecture, Universal Agent Context & Multi-Model Skills
 
-> *"Lumina adalah framework Rust pertama di dunia yang AI-First: Zero-Hallucination Agent Collaboration, Universal AI Context, dan Multi-Model Tool Calling Stubs (Gemini, Claude, OpenAI)."*
+> *"Pakem adalah framework Rust pertama di dunia yang AI-First: Zero-Hallucination Agent Collaboration, Universal AI Context, dan Multi-Model Tool Calling Stubs (Gemini, Claude, OpenAI)."*
 
 ---
 
-## 🏛️ 1. Filosofi AI-Ready Lumina
+## 🏛️ 1. Filosofi AI-Ready Pakem
 
-Saat developer membuat proyek baru (`lumina new my_app`) atau melakukan `git clone` proyek Lumina, AI Assistant yang digunakan (**Cursor, GitHub Copilot, Google Antigravity, Claude Code, Windsurf, atau ChatGPT**) langsung mengenali ekosistem Lumina tanpa berhalusinasi atau menulis boilerplate Axum mentah.
+Saat developer membuat proyek baru (`canting new my_app`) atau melakukan `git clone` proyek Pakem, AI Assistant yang digunakan (**Cursor, GitHub Copilot, Google Antigravity, Claude Code, Windsurf, atau ChatGPT**) langsung mengenali ekosistem Pakem tanpa berhalusinasi atau menulis boilerplate Axum mentah.
 
 ### File Konteks yang Otomatis Dibuat:
 1. **`AGENTS.md`**: Panduan master universal untuk AI Agent modern.
@@ -16,32 +16,32 @@ Saat developer membuat proyek baru (`lumina new my_app`) atau melakukan `git clo
 
 ---
 
-## ⚡ 2. Sinkronisasi Konteks AI (`lumina make:ai-context`)
+## ⚡ 2. Sinkronisasi Konteks AI (`canting make:ai-context`)
 
 Jika Anda melakukan clone repositori lama atau ingin memperbarui pedoman AI dengan versi terbaru:
 ```bash
 # Sinkronkan seluruh file instruksi AI
-lumina make:ai-context
+canting make:ai-context
 
 # Atau gunakan alias
-lumina ai:init
+canting ai:init
 
 # Timpa file yang sudah ada
-lumina make:ai-context --force
+canting make:ai-context --force
 
 # Target spesifik
-lumina make:ai-context --target=cursor
+canting make:ai-context --target=cursor
 ```
 
 ---
 
-## 🧠 3. Multi-Model AI Skill Generator (`lumina make:ai-skill`)
+## 🧠 3. Multi-Model AI Skill Generator (`canting make:ai-skill`)
 
 Anda dapat membuat Tool / Function Calling definitions yang otomatis kompatibel dengan **OpenAI, Google Gemini, Anthropic Claude, dan Antigravity/Cursor**:
 
 ```bash
 # Membuat skill umum dengan parameter tipe kuat
-lumina make:ai-skill SearchProducts keyword:string limit:i64 category_id:i64
+canting make:ai-skill SearchProducts keyword:string limit:i64 category_id:i64
 ```
 
 Perintah di atas secara otomatis menghasilkan 3 file terstandarisasi:
@@ -55,20 +55,20 @@ Perintah di atas secara otomatis menghasilkan 3 file terstandarisasi:
 
 Jika Anda ingin merekayasa balik (*reverse-engineer*) website, tampilan HTML, atau komponen aplikasi target:
 ```bash
-lumina make:ai-skill ReverseEngineer
+canting make:ai-skill ReverseEngineer
 ```
 AI Agent akan:
 - Menganalisis DOM/CSS dan mengubahnya menjadi template Blade dengan **Tailwind CSS**.
-- Mendeteksi elemen interaktif dan mengubahnya menjadi komponen **Lumina Live** (`kilat:*`, `wire:model`, `wire:click`).
-- Menginferensi struktur data ke dalam Model ORM `#[derive(LuminaModel)]` dan migrasi database.
+- Mendeteksi elemen interaktif dan mengubahnya menjadi komponen **Pakem Live** (`kilat:*`, `wire:model`, `wire:click`).
+- Menginferensi struktur data ke dalam Model ORM `#[derive(PakemModel)]` dan migrasi database.
 
 ---
 
-## 💬 5. Lumina Native AI Facade (`lumina::ai`)
+## 💬 5. Pakem Native AI Facade (`pakem::ai`)
 
 Panggil model AI populer secara ekspresif ala Laravel:
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 // 1. Google Gemini (Gemini 1.5 Flash / Pro)
 let reply = Ai::gemini()

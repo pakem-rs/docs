@@ -1,13 +1,13 @@
 # 📘 Modul 06: WASM Sandbox & Plugin
 
-Lumina memperkenalkan arsitektur **WASM Native Hybrid** menggunakan engine WebAssembly `wasmi 2.0`. Fitur ini memungkinkan pengembang menambahkan plugin pihak ketiga atau filter kustom yang berjalan dalam lingkungan terisolasi (*sandboxed*), aman dari *memory-leak* atau *panic/crash* pada server utama.
+Pakem memperkenalkan arsitektur **WASM Native Hybrid** menggunakan engine WebAssembly `wasmi 2.0`. Fitur ini memungkinkan pengembang menambahkan plugin pihak ketiga atau filter kustom yang berjalan dalam lingkungan terisolasi (*sandboxed*), aman dari *memory-leak* atau *panic/crash* pada server utama.
 
 ---
 
 ## 1. Arsitektur Isolasi (Fault Isolation)
 
 Setiap plugin WASM dieksekusi di dalam ruang memori virtual terpisah:
-- **Zero Host Crash**: Jika plugin mengalami *panic* atau pembagian nol, engine menangkapnya sebagai `SandboxError::Trap` dan mengembalikan pesan error tanpa menghentikan aplikasi web Lumina.
+- **Zero Host Crash**: Jika plugin mengalami *panic* atau pembagian nol, engine menangkapnya sebagai `SandboxError::Trap` dan mengembalikan pesan error tanpa menghentikan aplikasi web Pakem.
 - **Hot-Reloading**: File `.wasm` baru yang diletakkan di folder `plugins/` dapat langsung dideteksi tanpa perlu mengompilasi ulang aplikasi Rust utama.
 - **Resource Guard**: Plugin tidak memiliki akses langsung ke filesystem atau socket jaringan host kecuali diizinkan secara eksplisit melalui Host State API.
 
@@ -15,7 +15,7 @@ Setiap plugin WASM dieksekusi di dalam ruang memori virtual terpisah:
 
 ## 2. Membuat Plugin Baru (`lumina plugin:new`)
 
-Gunakan CLI Lumina untuk membuat starter crate plugin WebAssembly:
+Gunakan CLI Pakem untuk membuat starter crate plugin WebAssembly:
 
 ```bash
 lumina plugin:new sensor_kata
@@ -26,7 +26,7 @@ Perintah ini akan membuat struktur direktori di `plugins/sensor_kata/`:
 plugins/sensor_kata/
 ├── Cargo.toml          # crate-type = ["cdylib"], target wasm32
 ├── src/
-│   └── lib.rs          # Template implementasi ABI Lumina
+│   └── lib.rs          # Template implementasi ABI Pakem
 └── README.md           # Panduan penggunaan
 ```
 
@@ -39,7 +39,7 @@ File `src/lib.rs` yang digenerate telah menyertakan fungsi manajemen memori `all
 ```rust
 use std::mem;
 
-/// Alokasikan buffer memori di heap guest untuk menerima input string dari host Lumina.
+/// Alokasikan buffer memori di heap guest untuk menerima input string dari host Pakem.
 #[no_mangle]
 pub extern "C" fn alloc(len: i32) -> i32 {
     let mut buf = Vec::with_capacity(len as usize);

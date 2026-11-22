@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "⚡ Lumina Framework"
+  name: "⚡ Pakem Framework"
   text: "Look like Laravel, Run at Rust Speed."
   tagline: "Batteries-included web framework untuk Rust. Hadirkan keindahan sintaks Laravel, nol drama JavaScript runtime, dan keamanan enterprise tanpa kompromi."
   actions:
@@ -10,7 +10,7 @@ hero:
       text: "Mulai Petualangan ➔"
       link: "/01_instalasi_dan_persyaratan"
     - theme: alt
-      text: "🎨 Lumina Aurora"
+      text: "🎨 Pakem Aurora"
       link: "/14_lumina_aurora_starter_kit"
     - theme: alt
       text: "📊 Data Benchmark"
@@ -30,7 +30,7 @@ features:
     title: Batteries-Included
     details: "Semua kebutuhan web backend sudah terpasang rapi: Router, Migrasi SQLx, WebSocket Echo, Asynchronous Queue Workers, Cron Scheduler, dan Artisan-like CLI."
   - icon: 🌟
-    title: Lumina Aurora Starter Kit
+    title: Pakem Aurora Starter Kit
     details: Starter kit autentikasi & dashboard elegan dengan Pure Native Blade + Tailwind CSS. Zero JS runtime bloat, respons instan 60 FPS di perangkat apa pun.
   - icon: 🇮🇩
     title: Karya Ekosistem Indonesia
@@ -44,8 +44,8 @@ features:
 
 ::: code-group
 
-```rust [🦀 Lumina (Rust)]
-use lumina::prelude::*;
+```rust [🦀 Pakem (Rust)]
+use pakem::prelude::*;
 
 // Satu parameter tunggal, bersih, dan ekspresif!
 pub async fn index(req: Request) -> impl IntoResponse {
@@ -86,7 +86,7 @@ class UserController extends Controller
 }
 ```
 
-```rust [⚙️ Axum Mentah (Tanpa Lumina)]
+```rust [⚙️ Axum Mentah (Tanpa Pakem)]
 // Terlalu banyak boilerplate extractor dan penanganan error manual
 pub async fn index(
     State(pool): State<Arc<Pool<Sqlite>>>,
@@ -108,8 +108,8 @@ pub async fn index(
 <div style="margin-top: 4rem; text-align: center; padding: 2rem; background: var(--vp-c-bg-soft); border-radius: 12px;">
   <h3>🚀 Mulai Aplikasi Web Pertama Anda Dalam 30 Detik</h3>
   <p style="color: var(--vp-c-text-2); margin-bottom: 1.5rem;">Cukup pasang CLI dan bangkitkan proyek baru:</p>
-  <pre style="display: inline-block; text-align: left; background: #0f172a; color: #38bdf8; padding: 1rem 1.5rem; border-radius: 8px; font-weight: 600;"><code>cargo install --git https://github.com/lumina-java/lumina-cli
-lumina new my_app --aurora
-cd my_app && lumina serve</code></pre>
+  <pre style="display: inline-block; text-align: left; background: #0f172a; color: #38bdf8; padding: 1rem 1.5rem; border-radius: 8px; font-weight: 600;"><code>cargo install --git https://github.com/pakem-rs/pakem-cli
+canting new my_app --aurora
+cd my_app && canting serve</code></pre>
 </div>
 

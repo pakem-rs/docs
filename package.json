@@ -1,7 +1,7 @@
 {
   "name": "lumina-docs",
   "version": "0.5.0",
-  "description": "Official Documentation Portal for Lumina Framework — Look like Laravel, Run at Rust Speed",
+  "description": "Official Documentation Portal for Pakem Framework — Look like Laravel, Run at Rust Speed",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev src",

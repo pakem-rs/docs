@@ -1,12 +1,12 @@
-# 🖥️ Modul 24: Lumina Desktop Compilation Engine
+# 🖥️ Modul 24: Pakem Desktop Compilation Engine
 
-> *"Kompilasi Aplikasi Lumina Menjadi Standalone Single Executable Native Desktop App (.exe di Windows, Linux binary, macOS .app) dengan Performa Native Zero-Overhead."*
+> *"Kompilasi Aplikasi Pakem Menjadi Standalone Single Executable Native Desktop App (.exe di Windows, Linux binary, macOS .app) dengan Performa Native Zero-Overhead."*
 
 ---
 
-## 🏛️ 1. Mengapa Lumina Desktop?
+## 🏛️ 1. Mengapa Pakem Desktop?
 
-Berbeda dengan Electron yang mengemas Chromium raksasa (ukuran > 150MB dan boros RAM), **Lumina Desktop Engine**:
+Berbeda dengan Electron yang mengemas Chromium raksasa (ukuran > 150MB dan boros RAM), **Pakem Desktop Engine**:
 - Menggunakan engine WebView native sistem operasi (WebView2 di Windows, WebKitGTK di Linux).
 - Ukuran binary sangat ramping (~10-15MB).
 - Konsumsi memori sangat hemat (< 60MB RAM).
@@ -14,11 +14,11 @@ Berbeda dengan Electron yang mengemas Chromium raksasa (ukuran > 150MB dan boros
 
 ---
 
-## 🚀 2. Inisialisasi Mode Desktop (`lumina desktop:init`)
+## 🚀 2. Inisialisasi Mode Desktop (`canting desktop:init`)
 
-Jalankan perintah ini di root proyek Lumina Anda:
+Jalankan perintah ini di root proyek Pakem Anda:
 ```bash
-lumina desktop:init --title="Kasir POS Pintar" --width=1366 --height=768
+canting desktop:init --title="Kasir POS Pintar" --width=1366 --height=768
 ```
 Perintah ini menghasilkan:
 1. `desktop.toml`: Konfigurasi dimensi window, judul aplikasi, dan port lokal.
@@ -26,21 +26,21 @@ Perintah ini menghasilkan:
 
 ---
 
-## 🎮 3. Menjalankan Mode Desktop (`lumina desktop:run`)
+## 🎮 3. Menjalankan Mode Desktop (`canting desktop:run`)
 
 Untuk menjalankan aplikasi dalam window GUI native selama pengembangan:
 ```bash
-lumina desktop:run
+canting desktop:run
 ```
-Lumina akan otomatis mengalokasikan port loopback dinamis dan membuka window native yang terhubung ke server lokal secara instan.
+Pakem akan otomatis mengalokasikan port loopback dinamis dan membuka window native yang terhubung ke server lokal secara instan.
 
 ---
 
-## 📦 4. Kompilasi Executable Mandiri (`lumina desktop:build`)
+## 📦 4. Kompilasi Executable Mandiri (`canting desktop:build`)
 
 Untuk membuat binary tunggal siap rilis ke pengguna akhir:
 ```bash
-lumina desktop:build --release
+canting desktop:build --release
 ```
 Hasil file kompilasi:
 - **Windows**: `target/release/desktop.exe`

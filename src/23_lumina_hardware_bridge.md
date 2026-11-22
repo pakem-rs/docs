@@ -1,4 +1,4 @@
-# 🖨️ Modul 23: Lumina Hardware Bridge (Client WASM & POS Devices)
+# 🖨️ Modul 23: Pakem Hardware Bridge (Client WASM & POS Devices)
 
 > *"Menghubungkan Server Web Linux di Cloud ke Perangkat Keras Lokal di Client (Printer Thermal, Barcode Scanner, Fingerprint, dan Camera) secara Langsung."*
 
@@ -23,7 +23,7 @@ Server Linux (Cloud) ──[ WebSocket / SSE ]──> Browser Client (WASM Bridg
 Bangun format struk belanja kasir dengan builder lancar:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 let mut receipt = EscPosBuilder::new();
 receipt
@@ -57,7 +57,7 @@ let payload = receipt.to_base64();
 Menangani data pemindaian barcode dengan validasi check digit:
 
 ```rust
-use lumina::prelude::*;
+use pakem::prelude::*;
 
 let event = BarcodeScanEvent::new("9780201379624").with_format("EAN_13");
 if event.is_valid_ean13() {
@@ -74,14 +74,14 @@ Sertakan script client pada template Blade Anda:
 ```html
 <script>
     // Koneksikan browser ke printer USB thermal lokal
-    await LuminaDevice.printer.connectUsb();
+    await PakemDevice.printer.connectUsb();
 
     // Atau dengarkan barcode scanner serial (COM/USB port)
-    LuminaDevice.scanner.listen(9600, (barcode) => {
+    PakemDevice.scanner.listen(9600, (barcode) => {
         console.log("Barcode dipindai:", barcode);
     });
 
     // Hubungkan WebSocket ke server cloud untuk print otomatis
-    LuminaDevice.connectServerBridge("wss://pos.tokoanda.com/ws/devices");
+    PakemDevice.connectServerBridge("wss://pos.tokoanda.com/ws/devices");
 </script>
 ```
