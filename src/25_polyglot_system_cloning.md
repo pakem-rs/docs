@@ -3,6 +3,10 @@
 > **Visi:**  
 > *"Look like Laravel, Run at Rust Speed. Pindahkan sistem lama Anda yang sudah matang dan berjalan bertahun-tahun di Laravel, CodeIgniter, .NET, Golang, atau Java ke performa ekstrem Rust dalam hitungan detik."*
 
+<p align="center">
+  <img src="/demo-polyglot-clone.gif" alt="Pakem Polyglot System Cloner Demo" style="border-radius: 8px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4); margin: 20px 0;">
+</p>
+
 ---
 
 ## 🏛️ 1. Latar Belakang & Masalah Migrasi Bahasa
