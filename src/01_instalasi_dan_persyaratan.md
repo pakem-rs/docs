@@ -137,30 +137,46 @@ my-app/
 
 ## 5. Konfigurasi Environment (`.env`)
 
-File `.env` otomatis digenerate saat project dibuat. Contoh konfigurasi SQLite:
+Pakem mengadopsi standar **Laravel DX**. Anda **tidak perlu lagi menuliskan string `DATABASE_URL` yang panjang dan bertele-tele**. Cukup tentukan `DB_CONNECTION` dan parameter database terpisah:
 
+### A. SQLite (Zero-Config)
 ```env
-# Pengaturan Aplikasi
-APP_NAME=Pakem
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
-APP_KEY=pakem-super-secret-key-change-me-in-production
-
-# Logging
-LOG_LEVEL=info
-LOG_TO_FILE=true
-
-# Database Configuration (SQLite)
 DB_CONNECTION=sqlite
 DB_DATABASE=./database.sqlite
-DATABASE_URL=sqlite:./database.sqlite
-
-# Session & JWT
-JWT_SECRET=pakem-jwt-secret-key-change-me-in-production
-RATE_LIMIT_MAX=60
-RATE_LIMIT_WINDOW=60
 ```
+
+### B. MySQL / MariaDB
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=my_app
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
+
+### C. PostgreSQL
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=my_app
+DB_USERNAME=postgres
+DB_PASSWORD=secret
+```
+
+### D. Microsoft SQL Server (MSSQL)
+```env
+DB_CONNECTION=sqlsrv
+DB_HOST=127.0.0.1
+DB_PORT=1433
+DB_DATABASE=my_app
+DB_USERNAME=sa
+DB_PASSWORD=YourPassword123
+```
+
+> [!TIP]
+> **Eksplisit `DATABASE_URL` Bersifat Opsional**: Jika variabel `DATABASE_URL` tidak didefinisikan di `.env`, mesin Pakem Framework otomatis merakit koneksi berkecepatan tinggi dari pasangan variabel `DB_*` di atas. Jika `DATABASE_URL` tetap ingin ditulis manual (misalnya untuk penyedia cloud PaaS seperti Supabase/Neon/Railway), Pakem akan memprioritaskannya.
 
 ---
 
