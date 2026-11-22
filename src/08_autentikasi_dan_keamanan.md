@@ -20,21 +20,59 @@ Perintah ini akan secara otomatis membuat:
 
 ---
 
-## 2. Password Hashing (Bcrypt)
+## 2. Tri-Layer Password Hashing & Sandi A-N Hybrid
 
-Pakem menggunakan algoritma hashing **Bcrypt** standar industri:
+Pakem menghadirkan inovasi keamanan autentikasi tingkat enterprise melalui **Tri-Layer Password Security Stack**:
 
+```mermaid
+flowchart LR
+    Raw["Password Mentah: 'admin123'"] --> L0["Layer 0: Sandi A-N Hybrid ($ank$)"]
+    L0 -->|"Entropi acak terikat APP_KEY"| L1["Layer 1: HMAC-SHA256 Pepper"]
+    L1 -->|"Digest 32-Byte Anti-Bcrypt-Limit"| L2["Layer 2: Bcrypt (Cost 12)"]
+    L2 --> DB[("Database: $2b$12$...")]
+```
+
+### A. Tiga Lapis Pertahanan Mutlak:
+1. **Layer 0 (Enhanced Sandi A-N Hybrid)**:  
+   Mengombinasikan persandian keraton nusantara (substitusi A-N & inversi angka 0-5), *Cucuk Canting Interleaving* (transposisi pasangan indeks genap-ganjil), dan **Key-Dependent Dynamic Masking** yang diderivasi dari `APP_KEY`.  
+   *Keunggulan:* Tanpa `APP_KEY`, peretas mustahil merekonstruksi password sekalipun binary atau algoritmanya di-reverse engineer.
+2. **Layer 1 (HMAC-SHA256 Secret Pepper)**:  
+   Mengamankan string sandi dengan kunci rahasia aplikasi (`APP_KEY`). Melindungi dari *Rainbow Table* jika database bocor tanpa file `.env`, serta mengatasi batas 72-karakter pada Bcrypt.
+3. **Layer 2 (Bcrypt Slow Memory-Hard)**:  
+   Algoritma hashing lambat berstandar industri dengan work factor cost 12.
+
+### B. Penggunaan Facade `Hash`
 ```rust
-use bcrypt::{hash, verify, DEFAULT_COST};
+use pakem::prelude::*;
 
-// Hashing password baru
-let raw_password = "password_rahasia_123";
-let hashed = hash(raw_password, DEFAULT_COST)?;
+// 1. Membuat Hash Baru (Otomatis Layer 0 -> Layer 1 -> Layer 2)
+let hashed = Hash::make("password_rahasia_123");
 
-// Verifikasi password saat login
-let is_valid = verify("password_input_user", &hashed)?;
+// 2. Verifikasi Password Saat Login
+let is_valid = Hash::check("password_rahasia_123", &hashed);
 if is_valid {
     println!("Password cocok!");
+}
+```
+
+### C. Multi-Framework Legacy Auth Migration
+Saat memigrasikan aplikasi lama dari **Laravel**, **CodeIgniter 3**, atau **PHP Native** ke Pakem, pengguna **TIDAK PERLU** mereset password mereka. Gunakan `Hash::check_with_migration`:
+
+```rust
+// Otomatis mendeteksi dialek hash asal (Laravel Bcrypt, CI3 SHA-1, MD5 legacy, atau Pakem Tri-Layer)
+let (is_valid, needs_rehash) = Hash::check_with_migration("password123", &user.password);
+
+if is_valid {
+    if needs_rehash {
+        // Password cocok tapi masih berformat lama (misal Laravel $2y$)
+        // Otomatis re-hash ke standar Tri-Layer Pakem secara transparan!
+        let new_hash = Hash::make("password123");
+        User::query(req.db())
+            .where_eq("id", user.id)
+            .update_one("password", new_hash)
+            .await?;
+    }
+    // Lanjutkan proses login
 }
 ```
 
