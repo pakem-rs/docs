@@ -741,6 +741,22 @@ canting clone:ci /path/ke/proyek/codeigniter --views-only
 - **View Transpiler**: Mengonversi `<?= $var ?>` menjadi `{{ $var }}`, `form_open()` menjadi form HTML dengan `@csrf`, serta kontrol alur `<?php if ...: ?>` menjadi `@if`.
 - **Route Converter**: Mengubah wildcard CI `(:num)` dan `(:any)` menjadi parameter `{id}` dan `{slug}` di `routes/web.rs`.
 
+### D. `canting clone:api` (OpenAPI & Swagger Cloner — .NET / Golang / Java)
+Mengkloning kontrak RESTful API dari ekosistem **ASP.NET Core (.NET)**, **Golang (Gin/Fiber)**, maupun **Spring Boot** ke Pakem:
+
+```bash
+# Kloning kontrak API dari URL endpoint Swagger langsung
+canting clone:api https://api.example.com/swagger/v1/swagger.json --with-controllers
+
+# Kloning dari file lokal OpenAPI
+canting clone:api ./openapi.json --dto-only
+```
+
+**Kemampuan Otomatis:**
+- **DTO Model Generator**: Menghasilkan Struct Rust DTO bertipe kuat dengan derive `#[derive(Serialize, Deserialize)]` di `src/app/dto/`.
+- **API Routes**: Otomatis menghasilkan pemetaan rute lengkap di `routes/api.rs`.
+- **API Controllers**: Membangkitkan controller handlers yang mengembalikan standar `PakemResult`.
+
 ---
 
 ### Navigasi Modul:
