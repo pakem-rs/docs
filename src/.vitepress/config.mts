@@ -142,7 +142,7 @@ export default defineConfig({
           { text: 'Pakem Telescope', link: '/11_observabilitas_dan_telescope' },
         ]
       },
-      { text: 'v1.0.0 (LTS)', link: 'https://github.com/pakem-rs/framework/releases' }
+      { text: 'v1.0.2', link: 'https://github.com/pakem-rs/framework/releases' }
     ],
 
     sidebar: [
@@ -202,6 +202,12 @@ export default defineConfig({
           { text: '22. AI Context & Agent Skills', link: '/22_ai_agent_context_and_skills' },
           { text: '23. Pakem Hardware Bridge', link: '/23_pakem_hardware_bridge' },
           { text: '24. Pakem Desktop Engine', link: '/24_pakem_desktop_engine' },
+        ]
+      },
+      {
+        text: '🧬 Polyglot System Cloning',
+        items: [
+          { text: '25. Polyglot System Cloning Suite', link: '/25_polyglot_system_cloning' },
         ]
       },
       {
