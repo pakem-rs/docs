@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Pakem Framework',
   description: 'Look like Laravel, Run at Rust Speed. Batteries-included web framework for Rust.',
-  base: '/',
+  base: '/docs/',
   cleanUrls: true,
   lastUpdated: true,
 
