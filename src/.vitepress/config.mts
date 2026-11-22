@@ -7,13 +7,93 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
 
+  sitemap: {
+    hostname: 'https://pakem.my.id'
+  },
+
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['link', { rel: 'alternate icon', type: 'image/png', href: '/logo.png' }],
+    ['link', { rel: 'canonical', href: 'https://pakem.my.id/' }],
     ['meta', { name: 'theme-color', content: '#6366f1' }],
-    ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
-    ['meta', { name: 'og:description', content: 'Web framework Rust modern dengan Developer Experience termanis, performa raw speed, dan keamanan enterprise.' }],
+    ['meta', { name: 'author', content: 'Pakem Framework Core Team' }],
+    ['meta', { name: 'keywords', content: 'pakem, pakem framework, rust web framework, laravel rust, axum, tokio, canting cli, indonesian rust framework, high performance web backend, blade rust, orm rust' }],
+    ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }],
+
+    // Open Graph / Facebook / WhatsApp / Telegram
+    ['meta', { property: 'og:site_name', content: 'Pakem Framework' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
+    ['meta', { property: 'og:description', content: 'Look like Laravel, Run at Rust Speed. Batteries-included web framework untuk Rust.' }],
+    ['meta', { property: 'og:url', content: 'https://pakem.my.id/' }],
+    ['meta', { property: 'og:image', content: 'https://pakem.my.id/og-image.png' }],
+    ['meta', { property: 'og:image:secure_url', content: 'https://pakem.my.id/og-image.png' }],
+    ['meta', { property: 'og:image:type', content: 'image/png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
+    ['meta', { property: 'og:locale', content: 'id_ID' }],
+    ['meta', { property: 'og:locale:alternate', content: 'en_US' }],
+
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:site', content: '@pakem_rs' }],
+    ['meta', { name: 'twitter:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
+    ['meta', { name: 'twitter:description', content: 'Look like Laravel, Run at Rust Speed. Batteries-included web framework untuk Rust.' }],
+    ['meta', { name: 'twitter:image', content: 'https://pakem.my.id/og-image.png' }],
+
+    // GEO & AI Search Engine Friendly Meta Tags
+    ['meta', { name: 'ai-engine-content', content: 'index, snippet, summarize' }],
+    ['meta', { name: 'generator', content: 'VitePress' }],
+
+    // Schema.org Structured Data (JSON-LD) for Search Engines & Generative AI Graphs
+    [
+      'script',
+      { type: 'application/ld+json' },
+      JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': 'https://pakem.my.id/#website',
+            'url': 'https://pakem.my.id/',
+            'name': 'Pakem Framework',
+            'description': 'Look like Laravel, Run at Rust Speed. Batteries-included web framework for Rust.',
+            'publisher': {
+              '@id': 'https://pakem.my.id/#organization'
+            },
+            'inLanguage': ['id-ID', 'en-US']
+          },
+          {
+            '@type': 'Organization',
+            '@id': 'https://pakem.my.id/#organization',
+            'name': 'Pakem Framework Core Team',
+            'url': 'https://pakem.my.id/',
+            'logo': 'https://pakem.my.id/logo.png',
+            'sameAs': [
+              'https://github.com/pakem-rs',
+              'https://crates.io/crates/pakem'
+            ]
+          },
+          {
+            '@type': 'SoftwareApplication',
+            '@id': 'https://pakem.my.id/#software',
+            'name': 'Pakem Framework',
+            'operatingSystem': 'Linux, macOS, Windows',
+            'applicationCategory': 'DeveloperApplication',
+            'programmingLanguage': 'Rust',
+            'softwareVersion': '1.0.1',
+            'license': 'https://opensource.org/licenses/MIT',
+            'description': 'Look like Laravel, Run at Rust Speed. Menenun mahakarya perangkat lunak modern dengan ketelitian canting dan kekuatan pakem berkecepatan Rust.',
+            'url': 'https://pakem.my.id/',
+            'downloadUrl': 'https://crates.io/crates/pakem',
+            'author': {
+              '@id': 'https://pakem.my.id/#organization'
+            }
+          }
+        ]
+      })
+    ]
   ],
 
   themeConfig: {
