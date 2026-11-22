@@ -665,10 +665,64 @@ Product::query(req.db()).where_eq("id", 1).delete().await?;
 Product::query(req.db()).where_eq("id", 1).restore().await?;
 
 // 3. Force Delete (Menghapus baris fisik secara permanen dari tabel)
-
 Product::query(req.db()).where_eq("id", 1).force_delete().await?;
-
 ```
+
+---
+
+## 7. Reverse Engineering & Polyglot Cloning Suite
+
+Canting CLI menyediakan perkakas cerdas untuk mengimpor dan mengkloning skema database maupun logika aplikasi dari sistem lain ke Pakem Framework:
+
+### A. `canting clone:db` (Database Reverse Engineering)
+Memindai database fisik aktif (SQLite, PostgreSQL, MySQL) dan otomatis membangkitkan model Rust lengkap dengan relasi:
+
+```bash
+# Kloning seluruh skema database aktif
+canting clone:db
+
+# Kloning tabel tertentu dengan RESTful API Controller dan Factory
+canting clone:db --tables users,posts,comments --with-controllers --with-factories
+
+# Mode simulasi tanpa menulis file (pratinjau)
+canting clone:db --dry-run
+```
+
+**Kemampuan Cerdas:**
+- **Smart Relation Inference**: Otomatis mendeteksi foreign key menjadi `has_many!` dan `belongs_to!`.
+- **Pivot Table Detector**: Tabel junction many-to-many (misal `post_tag`) otomatis diubah menjadi `belongs_to_many!`.
+- **Soft Deletes Detection**: Tabel dengan kolom `deleted_at` otomatis dipasangi penanganan Soft Delete.
+
+---
+
+### B. `canting clone:laravel` (Laravel Project Transpiler)
+Mengkloning langsung struktur logika dari folder aplikasi **Laravel** ke **Pakem Framework**:
+
+```bash
+# Kloning seluruh model, routes, views, dan controllers dari proyek Laravel
+canting clone:laravel /path/ke/proyek/laravel --with-controllers
+
+# Hanya mengkloning Eloquent Models
+canting clone:laravel /path/ke/proyek/laravel --models-only
+
+# Hanya mengonversi template Blade PHP ke Pakem Blade (.blade.rs)
+canting clone:laravel /path/ke/proyek/laravel --views-only
+
+# Mode pratinjau (Dry-Run)
+canting clone:laravel /path/ke/proyek/laravel --dry-run
+```
+
+**Komponen yang Ditranspilasikan:**
+1. **Eloquent Models (`app/Models/*.php`)**:
+   - Mengekstrak `$table`, `$fillable`, `$casts`, dan `SoftDeletes`.
+   - Mentranspilasi relasi `hasMany`, `belongsTo`, `belongsToMany`, dan `hasOne` menjadi macro Pakem Rust.
+2. **Routes (`routes/web.php` & `routes/api.php`)**:
+   - Mentranspilasikan `Route::get`, `Route::post`, `Route::put`, `Route::delete`.
+   - Mengurai `Route::resource('posts', PostController::class)` menjadi 7 route RESTful standar.
+3. **Blade Views (`resources/views/**/*.blade.php` ➔ `.blade.rs`)**:
+   - Mengonversi sintaks objek PHP `$post->user->name` menjadi `$post.user.name` dan `$loop->iteration` menjadi `$loop.iteration`.
+4. **Controllers (`app/Http/Controllers/*.php`)**:
+   - Membangkitkan controller Pakem Rust yang mematuhi Unified `Request` bundle dan `PakemResult`.
 
 ---
 
