@@ -14,6 +14,8 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     ['link', { rel: 'alternate icon', type: 'image/png', href: '/logo.png' }],
+    ['link', { rel: 'apple-touch-icon', href: 'https://pakem.my.id/logo.png' }],
+    ['link', { rel: 'image_src', href: 'https://pakem.my.id/og-image.png' }],
     ['link', { rel: 'canonical', href: 'https://pakem.my.id/' }],
     ['meta', { name: 'theme-color', content: '#6366f1' }],
     ['meta', { name: 'author', content: 'Pakem Framework Core Team' }],
@@ -34,6 +36,7 @@ export default defineConfig({
     ['meta', { property: 'og:image:alt', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
     ['meta', { property: 'og:locale', content: 'id_ID' }],
     ['meta', { property: 'og:locale:alternate', content: 'en_US' }],
+    ['meta', { itemprop: 'image', content: 'https://pakem.my.id/og-image.png' }],
 
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
