@@ -34,12 +34,12 @@ Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tum
 
 ---
 
-## 🚀 2. Instalasi Cepat Satu Baris (`lumina aurora:install`)
+## 🚀 2. Instalasi Cepat Satu Baris (`canting aurora:install`)
 
 Anda dapat menginjeksi seluruh suite Pakem Aurora ke dalam proyek yang sudah ada hanya dengan satu perintah:
 
 ```bash
-lumina aurora:install
+canting aurora:install
 ```
 
 ### Apa yang Terjadi Saat Perintah Ini Dijalankan?
@@ -144,13 +144,13 @@ Dasbor Pakem Aurora menyajikan metrik performa aplikasi secara *real-time*:
 Pakem Aurora hadir dengan cakupan pengujian unit dan integrasi bawaan. Anda dapat menjalankan pengujian rute dan view rendering secara instan:
 
 ```bash
-cargo test test_lumina_aurora
+cargo test test_pakem_aurora
 ```
 
 Hasil pengujian membuktikan seluruh rute dan view ter-compile sempurna:
 ```text
-test test_lumina_aurora_views_rendering ... ok
-test test_lumina_aurora_routes_integration ... ok
+test test_pakem_aurora_views_rendering ... ok
+test test_pakem_aurora_routes_integration ... ok
 ```
 
 ---

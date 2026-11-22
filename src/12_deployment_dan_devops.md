@@ -92,25 +92,25 @@ canting make:supervisor
 File akan dibuat di `deploy/supervisor.conf`:
 
 ```ini
-[program:lumina-app]
+[program:pakem-app]
 command=/var/www/my-app/target/release/my-app-server
 directory=/var/www/my-app
 autostart=true
 autorestart=true
 user=www-data
 redirect_stderr=true
-stdout_logfile=/var/log/lumina-app.log
+stdout_logfile=/var/log/pakem-app.log
 environment=APP_ENV="production"
 ```
 
 ---
 
-## 5. Backup Database & Storage (`lumina backup:run`)
+## 5. Backup Database & Storage (`canting backup:run`)
 
 Pakem dilengkapi dengan toolchain backup mandiri:
 
 ```bash
-lumina backup:run
+pakem backup:run
 ```
 Perintah ini akan membuat snapshot cadangan database SQL dan arsip file dari `storage/app/public/` ke dalam folder `storage/backups/<timestamp>_backup.zip`.
 

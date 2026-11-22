@@ -45,13 +45,13 @@ export default defineConfig({
 
     nav: [
       { text: 'Panduan Awal', link: '/01_instalasi_dan_persyaratan' },
-      { text: 'Aurora Starter Kit', link: '/14_lumina_aurora_starter_kit' },
+      { text: 'Aurora Starter Kit', link: '/14_pakem_aurora_starter_kit' },
       { text: 'Enterprise Security', link: '/15_enterprise_security_dan_zero_panic' },
       { text: 'Whitepaper Benchmark', link: '/16_benchmark_dan_performance_whitepaper' },
       {
         text: 'Ekosistem',
         items: [
-          { text: 'Pakem Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
+          { text: 'Pakem Live (Reactive UI)', link: '/13_pakem_live_server_driven_ui' },
           { text: 'WASM Plugins', link: '/06_wasm_sandbox_dan_plugin' },
           { text: 'Indonesian Script (.is)', link: '/07_indonesian_script' },
           { text: 'Pakem Telescope', link: '/11_observabilitas_dan_telescope' },
@@ -93,14 +93,14 @@ export default defineConfig({
       {
         text: '🎨 Official Starter Kits & UI',
         items: [
-          { text: '14. Pakem Aurora Starter Kit', link: '/14_lumina_aurora_starter_kit' },
-          { text: '13. Pakem Live (Reactive UI)', link: '/13_lumina_live_server_driven_ui' },
+          { text: '14. Pakem Aurora Starter Kit', link: '/14_pakem_aurora_starter_kit' },
+          { text: '13. Pakem Live (Reactive UI)', link: '/13_pakem_live_server_driven_ui' },
         ]
       },
       {
         text: '⚡ Fitur Lanjutan (Advanced)',
         items: [
-          { text: '20. Pakem Tinker (Interactive REPL)', link: '/20_lumina_tinker' },
+          { text: '20. Pakem Tinker (Interactive REPL)', link: '/20_canting_tinker' },
           { text: '21. Dynamic WASM & Hot-Reload', link: '/21_wasm_plugins_hot_reload' },
           { text: '06. WASM Sandbox & Plugin', link: '/06_wasm_sandbox_dan_plugin' },
           { text: '07. Indonesian Script (.is)', link: '/07_indonesian_script' },
@@ -115,8 +115,8 @@ export default defineConfig({
         text: '🤖 AI Ecosystem & Hardware Bridge',
         items: [
           { text: '22. AI Context & Agent Skills', link: '/22_ai_agent_context_and_skills' },
-          { text: '23. Pakem Hardware Bridge', link: '/23_lumina_hardware_bridge' },
-          { text: '24. Pakem Desktop Engine', link: '/24_lumina_desktop_engine' },
+          { text: '23. Pakem Hardware Bridge', link: '/23_pakem_hardware_bridge' },
+          { text: '24. Pakem Desktop Engine', link: '/24_pakem_desktop_engine' },
         ]
       },
       {

@@ -11,7 +11,7 @@ hero:
       link: "/01_instalasi_dan_persyaratan"
     - theme: alt
       text: "🎨 Pakem Aurora"
-      link: "/14_lumina_aurora_starter_kit"
+      link: "/14_pakem_aurora_starter_kit"
     - theme: alt
       text: "📊 Data Benchmark"
       link: "/16_benchmark_dan_performance_whitepaper"
@@ -68,7 +68,7 @@ pub async fn index(req: Request) -> impl IntoResponse {
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Ilpakemte\Http\Request;
 
 class UserController extends Controller
 {

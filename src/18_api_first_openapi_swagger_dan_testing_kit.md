@@ -6,7 +6,7 @@
 Pakem Framework v0.8.0 menghadirkan **API-First Suite & Testing Ergonomics** yang mengubah cara pengembang membangun dan menguji backend REST API di Rust:
 1. **Route Metadata & OpenAPI v3 Auto-Generation**: Tambahkan metadata ekspresif langsung pada method chaining router Pakem (`.summary()`, `.description()`, `.tag()`, `.deprecated()`).
 2. **Built-in Swagger UI Endpoint**: Cukup panggil `.swagger_ui("/docs", ...)` pada router, maka visualisasi interaktif Swagger UI siap digunakan di browser.
-3. **CLI Exporter**: Perintah Artisan bawaan `lumina route:openapi` dan `lumina export:postman` untuk ekspor instan ke CI/CD maupun Postman/Insomnia.
+3. **CLI Exporter**: Perintah Artisan bawaan `canting route:openapi` dan `canting export:postman` untuk ekspor instan ke CI/CD maupun Postman/Insomnia.
 4. **Fluent HTTP Testing Assertion Kit (`pakem::testing::*`)**: Engine pengujian in-memory tanpa overhead jaringan TCP yang menyediakan 20+ assertion fluen ala Laravel (`assert_status`, `assert_json_path`, `assert_database_has`, dll).
 
 ---
@@ -76,19 +76,19 @@ Bagi tim backend yang mengintegrasikan spesifikasi API ke pipeline CI/CD atau me
 ### A. Ekspor OpenAPI Spec (`route:openapi`)
 ```bash
 # Menghasilkan openapi.json (default)
-lumina route:openapi
+canting route:openapi
 
 # Menghasilkan openapi.yaml
-lumina route:openapi --format yaml --output openapi.yaml
+canting route:openapi --format yaml --output openapi.yaml
 
 # Kustomisasi nama API & versi
-lumina route:openapi --title "POS API Service" --version "2.1.0"
+canting route:openapi --title "POS API Service" --version "2.1.0"
 ```
 
 ### B. Ekspor Koleksi Postman v2.1 (`export:postman`)
 ```bash
 # Menghasilkan koleksi Postman yang siap di-import 1-klik
-lumina export:postman --output pos_postman.json --name "POS Service API"
+canting export:postman --output pos_postman.json --name "POS Service API"
 ```
 
 ---
@@ -122,7 +122,7 @@ async fn test_contact_creation_flow() {
         .with_token("valid_jwt_token")
         .with_json(json!({
             "name": "Budi Santoso",
-            "email": "budi@lumina.dev",
+            "email": "budi@pakem.my.id",
             "phone": "08123456789"
         }))
         .send().await;
@@ -181,7 +181,7 @@ async fn test_database_state() {
 
     // Memastikan baris data tersimpan di tabel
     app.assert_database_has("users", json!({
-        "email": "budi@lumina.dev",
+        "email": "budi@pakem.my.id",
         "is_active": 1
     })).await;
 

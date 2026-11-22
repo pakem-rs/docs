@@ -23,28 +23,28 @@ Pakem CLI menyediakan toolchain lengkap untuk siklus hidup plugin:
 
 ### A. Membuat Plugin WASM Baru
 ```bash
-lumina plugin:new sensor_kata
+canting plugin:new sensor_kata
 ```
 Perintah ini akan membuat sub-proyek Rust mandiri di folder `plugins/sensor_kata/` yang dikonfigurasi khusus untuk target `wasm32-unknown-unknown`.
 
 ### B. Mengompilasi Plugin ke Biner `.wasm`
 ```bash
 # Kompilasi seluruh plugin di folder plugins/
-lumina plugin:build
+canting plugin:build
 
 # Kompilasi plugin tertentu
-lumina plugin:build sensor_kata
+canting plugin:build sensor_kata
 ```
 Biner output otomatis dioptimasi dan disimpan ke `plugins/sensor_kata.wasm`.
 
 ### C. Menampilkan Daftar Plugin
 ```bash
-lumina plugin:list
+canting plugin:list
 ```
 
 ### D. Memeriksa Dashboard Metrik & Kesehatan Plugin
 ```bash
-lumina plugin:metrics
+canting plugin:metrics
 ```
 Output:
 ```text
@@ -63,7 +63,7 @@ Script Modules Cached     : 0
 
 ### E. Memicu Reload Manual Tanpa Downtime
 ```bash
-lumina plugin:reload
+canting plugin:reload
 ```
 ```text
 🔄 Reloading Pakem WASM Plugins (Zero-Downtime Hot-Reload)...
@@ -105,9 +105,9 @@ Plugin WASM dapat merespons berbagai event siklus hidup aplikasi dengan mengeksp
 
 | Hook Type | Nama Fungsi Export WASM | Waktu Eksekusi |
 | :--- | :--- | :--- |
-| `PluginHook::OnRequest` | `lumina_on_request` | Dijalankan saat HTTP Request masuk. |
-| `PluginHook::BeforeSave` | `lumina_before_save` | Dijalankan sebelum model disimpan. |
-| `PluginHook::AfterResponse` | `lumina_after_response` | Dijalankan sebelum HTTP Response dikirim. |
+| `PluginHook::OnRequest` | `pakem_on_request` | Dijalankan saat HTTP Request masuk. |
+| `PluginHook::BeforeSave` | `pakem_before_save` | Dijalankan sebelum model disimpan. |
+| `PluginHook::AfterResponse` | `pakem_after_response` | Dijalankan sebelum HTTP Response dikirim. |
 
 ### Memanggil Hook dari Kode Host:
 ```rust

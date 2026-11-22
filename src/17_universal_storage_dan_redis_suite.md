@@ -133,7 +133,7 @@ SendWelcomeEmail { email: "user@example.com".into() }.dispatch(&req).await?;
 ### C. Menjalankan Worker Daemon
 Eksekusi worker daemon untuk memproses antrean dari Redis:
 ```bash
-lumina queue:work
+canting queue:work
 ```
 Worker akan secara otomatis mendeteksi konfigurasi `QUEUE_CONNECTION=redis` dan mengeksekusi job dengan latensi mikrodetik.
 

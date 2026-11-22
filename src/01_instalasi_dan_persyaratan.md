@@ -25,7 +25,7 @@ Sebelum menggunakan Pakem, pastikan sistem komputer Anda telah terpasang:
 
 ## 2. Instalasi Pakem CLI (`canting`)
 
-Pakem dilengkapi dengan toolchain Command Line Interface (CLI) bawaan yang elegan dan canggih bernama `lumina`.
+Pakem dilengkapi dengan toolchain Command Line Interface (CLI) bawaan yang elegan dan canggih bernama `pakem`.
 
 ### Cara 1: Pasang Global via Crates.io
 ```bash
@@ -39,13 +39,13 @@ cargo install --git https://github.com/pakem-rs/framework.git canting --force
 
 Setelah instalasi selesai, verifikasi dengan menjalankan:
 ```bash
-lumina --version
-lumina --help
+pakem --version
+pakem --help
 ```
 
 ### Cara 3: Auto-Upgrade Toolchain & Dependensi Proyek
 ```bash
-lumina upgrade
+canting upgrade
 ```
 
 ### Cara 4: Instalasi Lokal dari Source Code
@@ -145,7 +145,7 @@ APP_NAME=Pakem
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://localhost:8000
-APP_KEY=lumina-super-secret-key-change-me-in-production
+APP_KEY=pakem-super-secret-key-change-me-in-production
 
 # Logging
 LOG_LEVEL=info
@@ -157,7 +157,7 @@ DB_DATABASE=./database.sqlite
 DATABASE_URL=sqlite:./database.sqlite
 
 # Session & JWT
-JWT_SECRET=lumina-jwt-secret-key-change-me-in-production
+JWT_SECRET=pakem-jwt-secret-key-change-me-in-production
 RATE_LIMIT_MAX=60
 RATE_LIMIT_WINDOW=60
 ```

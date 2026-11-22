@@ -10,7 +10,7 @@
 
 ### Keunggulan Utama:
 1. **Zero JavaScript Overhead**: Tidak perlu setup bundler (Webpack, Vite, npm, node_modules).
-2. **Kompak & Ringan**: Ukuran script runtime `lumina-live.js` konstan **hanya ~6.5 KB** untuk seluruh aplikasi.
+2. **Kompak & Ringan**: Ukuran script runtime `pakem-live.js` konstan **hanya ~6.5 KB** untuk seluruh aplikasi.
 3. **Tri-Dialect Engine**: Mendukung 3 dialek interaksi sekaligus:
    * **🇮🇩 Dialek Indonesia (`kilat:*`)**: `kilat:klik`, `kilat:model`, `kilat:tunggu`, `kilat:yakin`
    * **🌐 Dialek Universal (`live:*`)**: `live:click`, `live:model`, `live:loading`, `live:confirm`

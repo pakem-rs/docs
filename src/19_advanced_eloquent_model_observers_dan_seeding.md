@@ -133,7 +133,7 @@ impl Seeder for UserSeeder {
         User::query(pool)
             .update_or_create([
                 ("name", "Super Admin"),
-                ("email", "admin@lumina.dev"),
+                ("email", "admin@pakem.my.id"),
                 ("password", &AutoHash::bcrypt("secret123", 10).unwrap()),
             ])
             .await?;
@@ -237,7 +237,7 @@ Mencari record berdasarkan klausa WHERE. Jika ditemukan, lakukan update kolom; j
 
 ```rust
 let contact = Contact::query(req.db())
-    .where_eq("email", "budi@lumina.dev")
+    .where_eq("email", "budi@pakem.my.id")
     .update_or_create([
         ("name", "Budi Santoso"),
         ("phone", "08123456789"),

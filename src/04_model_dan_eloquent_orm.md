@@ -449,7 +449,7 @@ Pakem v0.6.1 menyematkan **Smart Universal Parser** yang secara otomatis mengena
 
 3. **Format URL Standard (Otomatis Dikonversi oleh Pakem)**:
    ```env
-   DATABASE_URL="sqlserver://sa:YourPassword123@localhost:1433?database=lumina_db&trustServerCertificate=true"
+   DATABASE_URL="sqlserver://sa:YourPassword123@localhost:1433?database=pakem_db&trustServerCertificate=true"
    ```
 
 4. **Format ADO Connection String**:

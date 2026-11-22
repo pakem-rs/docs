@@ -39,7 +39,7 @@ Anda akan disambut oleh banner interaktif:
 📦 [Database] Terhubung ke basis data: PostgreSQL
 Ketik 'help' untuk daftar perintah, 'exit' atau Ctrl+D untuk keluar.
 
-lumina > 
+pakem > 
 ```
 
 ---
@@ -50,7 +50,7 @@ Pakem Tinker memahami sintaksis model Pakem secara otomatis:
 
 ### A. Mengambil Semua Record (`Model::all()`)
 ```rust
-lumina > User::all()
+pakem > User::all()
 ```
 Menghasilkan tabel ANSI Box-Drawing yang rapi:
 ```text
@@ -65,12 +65,12 @@ Menghasilkan tabel ANSI Box-Drawing yang rapi:
 
 ### B. Mencari Record Berdasarkan ID (`Model::find(id)`)
 ```rust
-lumina > User::find(1)
+pakem > User::find(1)
 ```
 
 ### C. Menghitung Total Record (`Model::count()`)
 ```rust
-lumina > Article::count()
+pakem > Article::count()
 => 42
 ⚡ Executed in 0.28ms (1 row)
 ```
@@ -83,13 +83,13 @@ Selain model, Anda dapat menggunakan Query Builder dinamis:
 
 ```rust
 // Ambil seluruh data tabel
-lumina > DB::table("orders").get()
+pakem > DB::table("orders").get()
 
 // Batasi jumlah baris
-lumina > DB::table("audit_logs").limit(5).get()
+pakem > DB::table("audit_logs").limit(5).get()
 
 // Hitung baris tabel tertentu
-lumina > DB::table("contacts").count()
+pakem > DB::table("contacts").count()
 ```
 
 ---
@@ -99,7 +99,7 @@ lumina > DB::table("contacts").count()
 Jika Anda ingin menjalankan query analitik kompleks atau DDL, Anda bisa mengetik SQL secara langsung:
 
 ```sql
-lumina > SELECT role, count(*) as total FROM users GROUP BY role;
+pakem > SELECT role, count(*) as total FROM users GROUP BY role;
 ┌───────┬───────┐
 │ role  │ total │
 ├───────┼───────┤
@@ -111,7 +111,7 @@ lumina > SELECT role, count(*) as total FROM users GROUP BY role;
 
 Perintah `INSERT`, `UPDATE`, atau `DELETE` juga didukung dengan pelaporan baris terpengaruh (*rows affected*):
 ```sql
-lumina > UPDATE users SET role = 'editor' WHERE id = 2;
+pakem > UPDATE users SET role = 'editor' WHERE id = 2;
 => Query OK, 1 row affected
 ⚡ Executed in 0.62ms
 ```
@@ -124,25 +124,25 @@ Pakem Tinker menyertakan shortcut evaluator untuk fungsi-fungsi utilitas:
 
 ### A. Bcrypt Password Hashing (`Hash::make` & `Hash::check`)
 ```rust
-lumina > Hash::make("secret123")
+pakem > Hash::make("secret123")
 => "$2b$10$wKk3j4N...qA"
 ⚡ Executed in 72.10ms
 
-lumina > Hash::check("secret123", "$2b$10$wKk3j4N...qA")
+pakem > Hash::check("secret123", "$2b$10$wKk3j4N...qA")
 => true
 ⚡ Executed in 71.85ms
 ```
 
 ### B. SEO AutoSlug Generator (`AutoSlug::slugify`)
 ```rust
-lumina > AutoSlug::slugify("Tutorial Rust: Keren & Cepat Tahun 2026!")
+pakem > AutoSlug::slugify("Tutorial Rust: Keren & Cepat Tahun 2026!")
 => "tutorial-rust-keren-cepat-tahun-2026"
 ⚡ Executed in 0.05ms
 ```
 
 ### C. UUID Generator (`Uuid::new()`)
 ```rust
-lumina > Uuid::new()
+pakem > Uuid::new()
 => "550e8400-e29b-41d4-a716-446655440000"
 ⚡ Executed in 0.02ms
 ```
@@ -162,5 +162,5 @@ lumina > Uuid::new()
 ---
 
 ## 💡 8. Produktivitas Terminal
-- **Riwayat Perintah (*Persistent History*)**: Tekan panah Atas/Bawah (`↑`/`↓`) untuk memanggil kembali perintah-perintah sebelumnya. Riwayat disimpan secara otomatis di file `.lumina_tinker_history`.
+- **Riwayat Perintah (*Persistent History*)**: Tekan panah Atas/Bawah (`↑`/`↓`) untuk memanggil kembali perintah-perintah sebelumnya. Riwayat disimpan secara otomatis di file `.pakem_tinker_history`.
 - **Zero Configuration**: Bekerja otomatis dengan SQLite, PostgreSQL, MySQL, dan SQL Server.

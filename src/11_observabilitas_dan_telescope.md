@@ -8,7 +8,7 @@
 
 Dashboard Telescope dapat diakses langsung melalui browser Anda di rute:
 
-👉 **`http://localhost:8000/lumina/telescope`**
+👉 **`http://localhost:8000/pakem/telescope`**
 
 Tampilan dasbor dibuat sangat modern dengan dark mode, indikator status berwarna, dan integrasi HTMX untuk pembaruan data instan tanpa me-refresh halaman.
 

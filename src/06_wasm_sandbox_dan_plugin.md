@@ -13,12 +13,12 @@ Setiap plugin WASM dieksekusi di dalam ruang memori virtual terpisah:
 
 ---
 
-## 2. Membuat Plugin Baru (`lumina plugin:new`)
+## 2. Membuat Plugin Baru (`canting plugin:new`)
 
 Gunakan CLI Pakem untuk membuat starter crate plugin WebAssembly:
 
 ```bash
-lumina plugin:new sensor_kata
+canting plugin:new sensor_kata
 ```
 
 Perintah ini akan membuat struktur direktori di `plugins/sensor_kata/`:
@@ -80,16 +80,16 @@ pub extern "C" fn transform(ptr: i32, len: i32) -> i64 {
 
 ---
 
-## 4. Kompilasi Plugin (`lumina plugin:build`)
+## 4. Kompilasi Plugin (`canting plugin:build`)
 
 Kompilasikan sub-crate plugin ke biner WebAssembly berekstensi `.wasm`:
 
 ```bash
 # Kompilasi plugin tertentu
-lumina plugin:build sensor_kata
+canting plugin:build sensor_kata
 
 # Atau kompilasi seluruh plugin di folder plugins/ sekaligus
-lumina plugin:build
+canting plugin:build
 ```
 
 Alur kerja otomatis:
@@ -99,12 +99,12 @@ Alur kerja otomatis:
 
 ---
 
-## 5. Melihat Daftar Plugin Aktif (`lumina plugin:list`)
+## 5. Melihat Daftar Plugin Aktif (`canting plugin:list`)
 
 Periksa semua plugin dan skrip yang tersedia di proyek Anda:
 
 ```bash
-lumina plugin:list
+canting plugin:list
 ```
 Output:
 ```text

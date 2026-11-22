@@ -16,7 +16,7 @@ Perintah ini akan secara otomatis membuat:
 - Model & Migrasi: `User` model dengan hashing password
 - Halaman View Blade: `resources/views/auth/login.blade.rs`, `register.blade.rs`, dan `dashboard.blade.rs`.
 
-> **Catatan:** Untuk starter kit autentikasi & dashboard modern berbasis Tailwind CSS dan Pure Blade dengan proteksi Anti Brute-Force & Audit Trail, gunakan **[Pakem Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)** (`lumina aurora:install`).
+> **Catatan:** Untuk starter kit autentikasi & dashboard modern berbasis Tailwind CSS dan Pure Blade dengan proteksi Anti Brute-Force & Audit Trail, gunakan **[Pakem Aurora Starter Kit](./14_pakem_aurora_starter_kit.md)** (`canting aurora:install`).
 
 ---
 
@@ -138,7 +138,7 @@ canting audit
 ## 7. Ekosistem Keamanan Tingkat Lanjut & Starter Kit
 
 Untuk implementasi keamanan tingkat lanjut dan starter kit siap pakai:
-- **[Modul 14: Pakem Aurora Starter Kit](./14_lumina_aurora_starter_kit.md)**: Paket autentikasi & dashboard elegan dengan Pure Blade + Tailwind CSS (`lumina aurora:install`).
+- **[Modul 14: Pakem Aurora Starter Kit](./14_pakem_aurora_starter_kit.md)**: Paket autentikasi & dashboard elegan dengan Pure Blade + Tailwind CSS (`canting aurora:install`).
 - **[Modul 15: Enterprise Security & Zero-Panic Safety](./15_enterprise_security_dan_zero_panic.md)**: Zero-Panic Error Boundary (`catch_unwind`), Anti Brute-Force lockout cache, OWASP security headers, dan audit trail ISO 27001.
 
 ---
