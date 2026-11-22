@@ -8,7 +8,8 @@ export default defineConfig({
   lastUpdated: true,
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/docs/logo.svg' }],
+    ['link', { rel: 'alternate icon', type: 'image/png', href: '/docs/logo.png' }],
     ['meta', { name: 'theme-color', content: '#6366f1' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
@@ -16,7 +17,8 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    siteTitle: '⚡ Pakem Framework',
+    siteTitle: 'Pakem Framework',
+    logo: '/logo.svg',
     
     search: {
       provider: 'local',

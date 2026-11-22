@@ -2,9 +2,12 @@
 layout: home
 
 hero:
-  name: "⚡ Pakem Framework"
+  name: "Pakem Framework"
   text: "Look like Laravel, Run at Rust Speed."
   tagline: "Batteries-included web framework untuk Rust. Hadirkan keindahan sintaks Laravel, nol drama JavaScript runtime, dan keamanan enterprise tanpa kompromi."
+  image:
+    src: /logo.svg
+    alt: Pakem Framework Logo
   actions:
     - theme: brand
       text: "Mulai Petualangan ➔"
