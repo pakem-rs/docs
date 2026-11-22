@@ -3,13 +3,13 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Pakem Framework',
   description: 'Look like Laravel, Run at Rust Speed. Batteries-included web framework for Rust.',
-  base: '/docs/',
+  base: '/',
   cleanUrls: true,
   lastUpdated: true,
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/docs/logo.svg' }],
-    ['link', { rel: 'alternate icon', type: 'image/png', href: '/docs/logo.png' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'alternate icon', type: 'image/png', href: '/logo.png' }],
     ['meta', { name: 'theme-color', content: '#6366f1' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:title', content: 'Pakem Framework — Look like Laravel, Run at Rust Speed' }],
