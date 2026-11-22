@@ -724,6 +724,23 @@ canting clone:laravel /path/ke/proyek/laravel --dry-run
 4. **Controllers (`app/Http/Controllers/*.php`)**:
    - Membangkitkan controller Pakem Rust yang mematuhi Unified `Request` bundle dan `PakemResult`.
 
+### C. `canting clone:ci` (CodeIgniter 3 & 4 Transpiler)
+Mengkloning aplikasi yang dibangun di atas framework **CodeIgniter 3** maupun **CodeIgniter 4** ke Pakem:
+
+```bash
+# Kloning seluruh aplikasi CodeIgniter 3 atau 4
+canting clone:ci /path/ke/proyek/codeigniter --with-controllers
+
+# Hanya mengonversi View PHP Native CI ke Blade Pakem (.blade.rs)
+canting clone:ci /path/ke/proyek/codeigniter --views-only
+```
+
+**Kemampuan Otomatis:**
+- **Deteksi Dual-Version**: Otomatis mendeteksi folder `application/` (CI3) atau `app/` (CI4).
+- **Normalisasi Model**: Membersihkan konvensi penamaan lama seperti `User_model` atau `UserModel` menjadi Struct Rust `User`.
+- **View Transpiler**: Mengonversi `<?= $var ?>` menjadi `{{ $var }}`, `form_open()` menjadi form HTML dengan `@csrf`, serta kontrol alur `<?php if ...: ?>` menjadi `@if`.
+- **Route Converter**: Mengubah wildcard CI `(:num)` dan `(:any)` menjadi parameter `{id}` dan `{slug}` di `routes/web.rs`.
+
 ---
 
 ### Navigasi Modul:
