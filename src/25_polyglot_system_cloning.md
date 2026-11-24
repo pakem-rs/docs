@@ -69,6 +69,10 @@ canting clone:laravel /path/ke/proyek/laravel --dry-run
   - Menguraikan `Route::resource('posts', PostController::class)` menjadi 7 route RESTful standar.
 - **Blade Views (`resources/views/**/*.blade.php` ➔ `.blade.rs`)**:
   - Mengonversi pemanggilan panah objek PHP `$post->user->name` menjadi `$post.user.name` dan `$loop->iteration` menjadi `$loop.iteration`.
+  - Mengonversi operator null-safe PHP `$post?->user?->name` menjadi `$post.user.name`.
+  - Mentranspilasikan direktif sesi Laravel `@session('status') ... @endsession` menjadi `@if(session('status'))`.
+  - Menetralkan blok skrip PHP mentah `@php ... @endphp` menjadi komentar informatif agar tidak merusak kompilasi Blade.
+  - Mendukung komponen Blade modern (`<x-... />`, `<x-slot:...>`), parameter sub-view `@include` (`['key' => $val]`, `compact(...)`), serta bundler `@vite(['...'])` dan `mix('...')`.
 - **Controllers (`app/Http/Controllers/*.php`)**:
   - Membangkitkan controller Pakem Rust yang mematuhi Unified `Request` bundle dan `PakemResult`.
 

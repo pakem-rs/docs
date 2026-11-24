@@ -24,7 +24,7 @@ Jika Anda melakukan clone repositori lama atau ingin memperbarui pedoman AI deng
 canting make:ai-context
 
 # Atau gunakan alias
-canting ai:init
+pakem ai:init
 
 # Timpa file yang sudah ada
 canting make:ai-context --force
@@ -86,11 +86,30 @@ let summary = Ai::openai()
     .generate()
     .await?;
 
-// 3. Anthropic Claude (Claude 3.7 Sonnet)
-let code_review = Ai::claude()
-    .model("claude-3-7-sonnet-20250219")
-    .max_tokens(4096)
-    .complete("Refactor handler controller ini: ...")
-    .generate()
-    .await?;
+---
+
+## 🛡️ 6. Perlindungan Data, Privasi & AI Governance (Vibe Coding Guidelines)
+
+Ketika tim atau developer menggunakan AI Agent (Antigravity, Cursor, Copilot, Windsurf, Claude) untuk aktivitas *vibe coding*, Pakem menerapkan pedoman keamanan data dan privasi:
+
+### A. File Ignore Khusus AI (`.aiignore` & `.cursorignore`)
+Pastikan file rahasia tidak pernah masuk ke context window AI:
+- File kredensial: `.env`, `.env.*` (kecuali `.env.example`).
+- Sertifikat & Kunci Enkripsi: `*.pem`, `*.key`, `*.pfx`, `*.crt`.
+- Dump & Cadangan Database: `*.sql`, `*.dump`, database SQLite (`*.sqlite`, `*.db`).
+- Direktori Penyimpanan: `storage/app/private/`, folder log, dan temporary scratch.
+
+File `.aiignore` dan `.cursorignore` ini otomatis dibuat saat Anda menjalankan `canting new` atau `canting make:ai-context`.
+
+### B. Isolasi Data Produksi (Data Dummy via Model Factory)
+Dilarang menggunakan data produksi asli di lingkungan lokal. Gunakan Model Factory & Seeder (`Faker` Indonesia) bawaan Pakem:
+```rust
+// Seeding 50 user dummy aman untuk konteks pengembangan AI
+User::factory().count(50).create(req.db()).await?;
 ```
+
+### C. Approval Mode (Human-in-the-Loop)
+Jangan mengaktifkan mode auto-run penuh pada AI Agent untuk operasi krusial (seperti migrasi database destruktif atau penghapusan file). Tetapkan konfigurasi agar agen selalu meminta konfirmasi sebelum mengeksekusi instruksi berisiko.
+
+### D. Model Lokal untuk Proprietary IP
+Untuk kode rahasia inti atau modul perbankan/finansial yang tidak boleh keluar ke cloud publik, sambungkan IDE Anda ke model lokal (melalui **Ollama** atau **LM Studio**) sehingga inferensi berjalan 100% di mesin internal intranet.
