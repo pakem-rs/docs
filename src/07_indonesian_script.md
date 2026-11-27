@@ -73,7 +73,7 @@ Pakem menyediakan sejumlah fungsi bawaan yang siap pakai di dalam skrip `.is`:
 | :--- | :--- | :--- |
 | `rupiah(angka)` | Format angka ke teks Rupiah | `rupiah(50000)` ➔ `"Rp 50.000"` |
 | `panjang(teks)` | Menghitung jumlah karakter | `panjang("halo")` ➔ `4` |
-| `huruf_besar(teks)` | Mengubah ke huruf besar | `huruf_besar("pakem")` ➔ `"LUMINA"` |
+| `huruf_besar(teks)` | Mengubah ke huruf besar | `huruf_besar("pakem")` ➔ `"PAKEM"` |
 | `huruf_kecil(teks)` | Mengubah ke huruf kecil | `huruf_kecil("RUST")` ➔ `"rust"` |
 | `potong(teks, batas)` | Memotong string panjang | `potong("artikel panjang", 7)` ➔ `"artikel..."` |
 | `cetak(...)` | Menampilkan log debug ke console | `cetak("Nilai kalkulasi:", subtotal)` |

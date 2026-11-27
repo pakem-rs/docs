@@ -10,7 +10,7 @@ Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tum
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                         LUMINA AURORA ARCHITECTURE                     │
+│                         PAKEM AURORA ARCHITECTURE                     │
 ├────────────────────────────────────────────────────────────────────────┤
 │                                                                        │
 │   [ Backend Engine: Rust + Axum + Tokio ] ── (SSR Response < 0.5ms)    │
@@ -27,9 +27,9 @@ Berbeda dengan starter kit di ekosistem lain yang memaksa developer memasang tum
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **Zero-JS Runtime Bloat**: Tidak ada bundle JavaScript 5MB yang memperlambat browser pengguna. Performa murni 60 FPS di perangkat apa pun.
-2. **Sub-Millisecond SSR**: Halaman dirender langsung di memory Rust thread pool dalam waktu `< 0.5ms`.
-3. **Enterprise Security Out-of-the-Box**: Dilengkapi Anti Brute-Force lockout, verifikasi password berkecepatan konstan (*constant-time comparison*), CSRF guard otomatis, dan pencatatan audit log ISO 27001.
+1. **Zero-JS Runtime Bloat**: Tidak ada bundle JavaScript 5MB yang memperlambat browser pengguna — rendering HTML server-side instan dan ringan.
+2. **Fast SSR**: Halaman dirender langsung di memory Rust thread pool.
+3. **Enterprise Security Out-of-the-Box**: Dilengkapi Anti Brute-Force lockout, verifikasi password berkecepatan konstan (*constant-time comparison*), CSRF guard otomatis, dan audit log terstruktur untuk membantu kontrol kepatuhan (seperti ISO 27001).
 4. **Desain Modern Siap Produksi**: Termasuk Dark & Light mode yang elegan, komponen glassmorphism, responsive collapsible sidebar, dan badge status visual.
 
 ---

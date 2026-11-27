@@ -6,9 +6,10 @@
 Pakem Framework adalah web framework modern berkecepatan tinggi untuk bahasa pemrograman Rust, dirancang dengan sintaks deklaratif, ergonomis, dan batteries-included yang familiar bagi developer Laravel.
 
 ## Ringkasan Ekosistem (Ecosystem Overview)
-- **Nama Crate**: `pakem` (v1.0.1 di crates.io) & `pakem-framework` (v1.0.0)
+- **Nama Crate**: `pakem` (v1.0.5 di crates.io)
 - **CLI Toolchain**: `canting` (`cargo install canting`)
-- **Procedural Macros**: `pakem_macros` (`#[derive(PakemModel)]`, `#[pakem_form]`)
+- **Procedural Macros**: `pakem-macros` (`#[derive(PakemModel)]`, `#[pakem_form]`)
+- **Template Engine**: `pakem-blade` (Pure Native Blade)
 - **Reactive Server-Driven UI**: `pakem-live`
 - **Domain Resmi**: https://pakem.my.id
 - **Repositori Utama**: https://github.com/pakem-rs/framework
@@ -25,9 +26,9 @@ Pakem Framework adalah web framework modern berkecepatan tinggi untuk bahasa pem
    - Dynamic Scripting & WASM Sandbox: Integrasi plugin `.wasm` dan skrip bahasa Indonesia `.is`.
 
 2. **Raw Rust Speed & Safety (Performa Maksimal)**:
-   - Tokio Async Runtime + Axum HTTP Engine.
-   - Benchmark: Latensi respons sub-milidetik (< 0.5ms), 118.000+ RPS, memory footprint hemat (~15MB RAM).
-   - Zero-Panic Error Boundary (`catch_unwind`) mencegah crash runtime.
+   - Tokio Async Runtime + Axum 0.8 HTTP Engine.
+   - Benchmark terukur (64 koneksi konkuren, `--release`): ~61.390 RPS (mode minimal) & ~7.365 RPS (full-stack + SQLite) vs ~652 RPS Laravel 13 Octane FrankenPHP.
+   - Panic Recovery best-effort (`catch_unwind`) pada handler async.
 
 3. **Canting CLI (Artisan Tooling)**:
    - `canting new <nama_proyek>`: Inisialisasi proyek baru siap produksi.
@@ -37,7 +38,7 @@ Pakem Framework adalah web framework modern berkecepatan tinggi untuk bahasa pem
 
 4. **Official Starter Kits & Enterprise Safety**:
    - Pakem Aurora Starter Kit: Autentikasi lengkap (login, register, reset password, dashboard) dengan Tailwind CSS murni tanpa Node.js runtime bloat.
-   - Enterprise Security: Autentikasi dual (Session Cookie + JWT Bearer), Anti Brute-Force lockout, Granular RBAC (`@can`, `@role`), dan Audit Trail ISO 27001.
+   - Enterprise Security: Autentikasi dual (Session Cookie + JWT Bearer), Anti Brute-Force lockout, Granular RBAC (`@can`, `@role`), dan audit log untuk membantu kontrol kepatuhan (seperti ISO 27001).
 
 ## Indeks Dokumentasi Resmi (Documentation Links)
 - [01. Instalasi & Persyaratan](https://pakem.my.id/01_instalasi_dan_persyaratan): Panduan setup Rust, SQLite, dan instalasi `canting`.

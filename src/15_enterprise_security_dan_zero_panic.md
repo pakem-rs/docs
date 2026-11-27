@@ -188,9 +188,9 @@ Header keamanan yang diinjeksi secara otomatis:
 
 ---
 
-## 📝 6. Enterprise Audit Trail Logger (SOC 2 / ISO 27001)
+## 📝 6. Enterprise Audit Trail Logger (Membantu Kontrol Kepatuhan)
 
-Pencatatan rekam jejak aktivitas (*Audit Trail*) bersifat asinkron, non-blocking, dan terstruktur untuk mematuhi regulasi perbankan dan privasi data (GDPR / ISO 27001).
+Pencatatan rekam jejak aktivitas (*Audit Trail*) bersifat asinkron, non-blocking, dan terstruktur untuk membantu pemenuhan kontrol kepatuhan regulasi dan privasi data (seperti GDPR, SOC 2, atau ISO 27001).
 
 ```rust
 // Mencatat aktivitas penting dari controller

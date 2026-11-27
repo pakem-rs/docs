@@ -22,19 +22,19 @@ hero:
 features:
   - icon: ⚡
     title: Raw Rust Speed
-    details: Dibangun di atas Tokio Async Runtime dan Axum Engine. Latensi respons sub-milidetik (< 0.5ms), 118.000+ RPS, dan penggunaan memori sangat hemat (~15MB RAM).
+    details: Dibangun di atas Tokio Async Runtime dan Axum 0.8. Mencapai ~61.390 RPS (mode minimal) dan ~7.365 RPS (full-stack + SQLite) dengan latensi 1–8 ms.
   - icon: 🎨
     title: Laravel Elegance
-    details: Ucapkan selamat tinggal pada boilerplate berbelit-belit. Nikmati Unified Request bundle, Fluent Eloquent ORM, Native Blade templating, dan sintaks deklaratif.
+    details: Ucapkan selamat tinggal pada boilerplate berbelit-belit. Nikmati Unified Request bundle, Typed Extractors (ExtractDb), Fluent ORM, dan Native Blade templating.
   - icon: 🛡️
-    title: Zero-Panic & Enterprise Safety
-    details: Dilindungi oleh Global Zero-Panic Error Boundary (catch_unwind), Anti Brute-Force lockout, Granular RBAC (@can, @role), dan Audit Trail ISO 27001.
+    title: Enterprise Safety & Panic Recovery
+    details: Dilindungi oleh panic recovery best-effort (catch_unwind), Anti Brute-Force lockout, Granular RBAC (@can, @role), dan audit log untuk kontrol kepatuhan (seperti ISO 27001).
   - icon: 🔋
     title: Batteries-Included
     details: "Semua kebutuhan web backend sudah terpasang rapi: Router, Migrasi SQLx, WebSocket Echo, Asynchronous Queue Workers, Cron Scheduler, dan Artisan-like CLI."
   - icon: 🌟
     title: Pakem Aurora Starter Kit
-    details: Starter kit autentikasi & dashboard elegan dengan Pure Native Blade + Tailwind CSS. Zero JS runtime bloat, respons instan 60 FPS di perangkat apa pun.
+    details: Starter kit autentikasi & dashboard elegan dengan Pure Native Blade + Tailwind CSS. Zero JS runtime bloat dengan rendering HTML server-side instan.
   - icon: 🇮🇩
     title: Karya Ekosistem Indonesia
     details: Dilengkapi Faker data realistis Indonesia (nama, telepon, alamat, rupiah) serta dukungan kompilator skrip dinamis berbasis bahasa Indonesia (.is).
@@ -141,7 +141,7 @@ canting serve</code></pre>
   <details style="margin-top: 1rem; padding: 1rem 1.5rem; background: var(--vp-c-bg-soft); border-radius: 10px;">
     <summary style="font-weight: 700; cursor: pointer; color: var(--vp-c-text-1);">Seberapa cepat performa Pakem Framework?</summary>
     <p style="margin-top: 0.75rem; color: var(--vp-c-text-2); line-height: 1.6;">
-      Pada pengujian benchmark concurrency tinggi, Pakem Framework mampu melayani hingga <strong>118.000+ Requests Per Second (RPS)</strong> dengan latensi rata-rata sub-milidetik (&lt; 0.5ms) dan konsumsi memori hanya sekitar ~15MB RAM dalam mode idle produksi.
+      Pada benchmark terukur di mesin Windows (64 koneksi konkuren, `--release`), **Pakem 1.0.5** mencapai <strong>61.390 RPS</strong> (`/plaintext`) dan <strong>34.090 RPS</strong> (`/db-users` SQLite) dalam mode minimal (<code>.without_default_middleware()</code>), serta <strong>7.365 RPS</strong> dalam mode full-stack default — 8× hingga 12,4× lebih cepat dibanding Laravel 13 Octane FrankenPHP (~652 RPS) pada mesin yang sama.
     </p>
   </details>
 

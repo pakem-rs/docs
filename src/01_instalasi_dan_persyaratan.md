@@ -178,6 +178,24 @@ DB_PASSWORD=YourPassword123
 > [!TIP]
 > **Eksplisit `DATABASE_URL` Bersifat Opsional**: Jika variabel `DATABASE_URL` tidak didefinisikan di `.env`, mesin Pakem Framework otomatis merakit koneksi berkecepatan tinggi dari pasangan variabel `DB_*` di atas. Jika `DATABASE_URL` tetap ingin ditulis manual (misalnya untuk penyedia cloud PaaS seperti Supabase/Neon/Railway), Pakem akan memprioritaskannya.
 
+### 5.1 Menghasilkan Kunci Aplikasi (`canting key:generate`)
+
+Kunci aplikasi (`APP_KEY`) bertugas mengamankan cookie terenkripsi, sesi pengguna, token HMAC, dan snapshot state reaktif. Setiap kali membuat proyek baru atau mengkloning repositori, pastikan kunci aplikasi telah digenerate:
+
+```bash
+# Menghasilkan dan menyimpan APP_KEY acak 256-bit langsung ke file .env
+canting key:generate
+
+# Menampilkan key ke terminal tanpa memodifikasi file .env
+canting key:generate --show
+
+# Memperbarui APP_KEY sekaligus JWT_SECRET
+canting key:generate --jwt
+```
+
+> [!IMPORTANT]
+> Saat berada di lingkungan produksi (`APP_ENV=production`), `canting key:generate` otomatis meminta konfirmasi atau flag `--force` untuk mencegah kerusakan dekripsi data sesi dan token pengguna yang sedang aktif.
+
 ---
 
 ## 6. Menjalankan Server Aplikasi

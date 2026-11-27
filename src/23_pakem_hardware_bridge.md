@@ -30,7 +30,7 @@ receipt
     .align_center()
     .bold(true)
     .double_size(true)
-    .line("TOKO ROTI LUMINA")
+    .line("TOKO ROTI PAKEM")
     .bold(false)
     .double_size(false)
     .line("Jl. Sudirman No. 12, Jakarta")

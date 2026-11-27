@@ -175,7 +175,7 @@ canting db:seed --class ProductSeeder
 
 ## 🕵️ 6. Declarative Audit Trail Logging (`Audit`)
 
-Catat riwayat mutasi data secara transparan untuk keperluan compliance enterprise (SOC 2, ISO 27001).
+Catat riwayat mutasi data secara transparan untuk membantu kontrol kepatuhan (seperti SOC 2 atau ISO 27001).
 
 ### A. Mencatat Log Audit Baru
 ```rust

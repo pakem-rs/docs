@@ -156,7 +156,30 @@ Sembunyikan atau tampilkan elemen navigasi berdasarkan status login:
 
 ---
 
-## 6. Pakem Shield Security Audit (`canting audit`)
+## 6. Kunci Enkripsi Aplikasi & Key Generator (`canting key:generate`)
+
+Pakem Framework menggunakan `APP_KEY` berkekuatan CSPRNG 256-bit (Base64) untuk mengamankan data rahasia:
+- **Enkripsi Cookie & Sesi**: Memastikan cookie sesi tidak dapat dibaca atau dimanipulasi di sisi browser.
+- **HMAC Signatures**: Menandatangani token CSRF, URL S3 bertanda tangan, dan snapshot state Pakem Live.
+- **SandiAN Pepper Hashing**: Lapisan perlindungan tambahan terhadap rainbow table attacks pada hash sandi.
+
+```bash
+# Menghasilkan dan menyimpan APP_KEY baru ke file .env
+canting key:generate
+
+# Menghasilkan APP_KEY sekaligus JWT_SECRET
+canting key:generate --jwt
+
+# Menampilkan key ke stdout tanpa mengubah file
+canting key:generate --show
+
+# Force generate di lingkungan produksi
+canting key:generate --force
+```
+
+---
+
+## 7. Pakem Shield Security Audit (`canting audit`)
 
 Sebelum melakukan deployment ke server produksi, Pakem menyediakan alat audit keamanan otomatis:
 
@@ -173,7 +196,7 @@ canting audit
 
 ---
 
-## 7. Ekosistem Keamanan Tingkat Lanjut & Starter Kit
+## 8. Ekosistem Keamanan Tingkat Lanjut & Starter Kit
 
 Untuk implementasi keamanan tingkat lanjut dan starter kit siap pakai:
 - **[Modul 14: Pakem Aurora Starter Kit](./14_pakem_aurora_starter_kit.md)**: Paket autentikasi & dashboard elegan dengan Pure Blade + Tailwind CSS (`canting aurora:install`).
