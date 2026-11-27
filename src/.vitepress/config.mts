@@ -85,7 +85,7 @@ export default defineConfig({
             'operatingSystem': 'Linux, macOS, Windows',
             'applicationCategory': 'DeveloperApplication',
             'programmingLanguage': 'Rust',
-            'softwareVersion': '1.0.1',
+            'softwareVersion': '1.0.5',
             'license': 'https://opensource.org/licenses/MIT',
             'description': 'Look like Laravel, Run at Rust Speed. Menenun mahakarya perangkat lunak modern dengan ketelitian canting dan kekuatan pakem berkecepatan Rust.',
             'url': 'https://pakem.my.id/',
@@ -142,7 +142,7 @@ export default defineConfig({
           { text: 'Pakem Telescope', link: '/11_observabilitas_dan_telescope' },
         ]
       },
-      { text: 'v1.0.2', link: 'https://github.com/pakem-rs/framework/releases' }
+      { text: 'v1.0.5', link: 'https://github.com/pakem-rs/framework/releases' }
     ],
 
     sidebar: [

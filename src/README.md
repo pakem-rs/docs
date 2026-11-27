@@ -1,4 +1,4 @@
-# 📚 Dokumentasi Resmi Pakem Framework (v1.0.0 LTS)
+# 📚 Dokumentasi Resmi Pakem Framework (v1.0.5)
 
 > *"Look like Laravel, Run at Rust Speed. Menghadirkan Developer Experience termanis dengan performa raw speed, memory safety, dan keamanan tingkat enterprise."*
 
