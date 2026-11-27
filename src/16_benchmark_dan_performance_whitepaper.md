@@ -1,133 +1,73 @@
-# 📊 Modul 16: Whitepaper Benchmark & Laporan Performa Resmi
+# 📊 Modul 16: Laporan Benchmark & Performa Reproducible
 
-> **Prinsip Utama:** *"Look like Laravel, Run at Rust Speed."*  
-> Whitepaper ini menyajikan hasil pengujian performa transparan, metodologi pengujian, dan analisis komparasi terukur antara **Pakem Framework (Rust)** dan framework web populer di ekosistem lain (Laravel PHP Octane, Express.js, FastAPI, dan Go Gin).
-
----
-
-## ⚙️ 1. Metodologi & Lingkungan Pengujian
-
-Seluruh pengujian dilakukan pada lingkungan yang terisolasi dan identik guna menjamin keadilan (*fairness*) hasil evaluasi:
-
-* **Spesifikasi Server Uji**:
-  - **CPU**: AMD EPYC 7763 (4 vCPU dedicated @ 2.45GHz)
-  - **RAM**: 8 GB DDR4 ECC
-  - **Storage**: NVMe SSD 50GB
-  - **Sistem Operasi**: Ubuntu 24.04 LTS (Kernel 6.8.0)
-* **Tool Beban Pengujian**: `wrk` (v4.2.0) & `autocannon` (v7.15.0) dijalankan dari server klien terpisah dengan koneksi jaringan 10Gbps LAN.
-* **Parameter Pengujian Beban**:
-  - Durasi: 60 detik per skenario
-  - Threads: 8 worker threads
-  - Concurrency: 128 - 10.000 concurrent connections
-* **Versi Framework yang Diuji**:
-  - **Pakem v0.5.0** (Rust 1.80 + Tokio Async + Axum Engine)
-  - **Go Gin v1.10** (Go 1.22)
-  - **Laravel 11 + Octane** (PHP 8.3 + Swoole 5.1 + Opcache aktif)
-  - **Express.js v4.19** (Node.js v20.12 LTS Cluster mode)
-  - **FastAPI v0.111** (Python 3.12 + Uvicorn standard)
+> **Prinsip Utama:** *"Crafted with Canting Precision, Driven by the Raw Speed of Rust."*  
+> Dokumen ini menyajikan hasil pengujian performa **nyata dan dapat direproduksi** antara **Pakem Framework v1.0.5**, **Axum 0.8 (polos)**, **Actix-web 4.20.0**, dan **Laravel 13 + Octane (FrankenPHP)** pada mesin yang sama.
 
 ---
 
-## 📈 2. Hasil Ringkasan Tolok Ukur (Executive Summary)
+## ⚙️ 1. Metodologi & Lingkungan Pengujian Nyata
 
-### A. Matriks Throughput (Permintaan per Detik / RPS)
-*Semakin tinggi nilainya, semakin baik.*
+Seluruh pengujian dijalankan secara berurutan pada mesin lokal yang sama dalam mode kompilasi `--release`:
 
-```
-Throughput JSON API (Requests Per Second)
-─────────────────────────────────────────────────────────────────────────────
-Pakem (Rust)      ███████████████████████████████████████████ 118.420 RPS
-Go Gin             ████████████████████████████████           96.850 RPS
-Express.js (Node)  ███████                                    22.310 RPS
-Laravel 11 Octane  ██████                                     18.940 RPS
-FastAPI (Python)   ████                                       14.120 RPS
-─────────────────────────────────────────────────────────────────────────────
-```
-
-### B. Matriks Latensi (Latency Percentiles dalam Milidetik)
-*Semakin rendah nilainya, semakin baik.*
-
-| Framework | Latency p50 | Latency p90 | Latency p99 | Max Latency |
-| :--- | :---: | :---: | :---: | :---: |
-| ⚡ **Pakem Framework (Rust)** | **0.28 ms** | **0.62 ms** | **0.95 ms** | **2.80 ms** |
-| 🐹 **Go Gin** | 0.42 ms | 0.88 ms | 1.45 ms | 4.20 ms |
-| 🟢 **Express.js (Node.js)** | 2.10 ms | 4.30 ms | 7.60 ms | 24.50 ms |
-| 🐘 **Laravel 11 + Octane** | 2.65 ms | 5.10 ms | 8.80 ms | 28.10 ms |
-| 🐍 **FastAPI (Python)** | 3.40 ms | 6.80 ms | 10.20 ms | 35.00 ms |
-
-### C. Efisiensi Penggunaan Memori (RAM Footprint)
-*Semakin kecil nilainya, semakin hemat biaya infrastruktur cloud server.*
-
-| Framework | RAM Saat Idle | RAM Saat Beban Puncak (10.000 Koneksi) |
-| :--- | :---: | :---: |
-| ⚡ **Pakem Framework (Rust)** | **~14.2 MB** | **~38.5 MB** |
-| 🐹 **Go Gin** | ~18.6 MB | ~48.2 MB |
-| 🟢 **Express.js (Node.js)** | ~64.8 MB | ~245.0 MB |
-| 🐍 **FastAPI (Python)** | ~72.0 MB | ~288.0 MB |
-| 🐘 **Laravel 11 + Octane** | ~112.0 MB | ~395.0 MB |
+* **Spesifikasi Mesin Uji**:
+  - **Arsitektur & Core**: `AMD64` · `12 logical cores`
+  - **Sistem Operasi**: `Microsoft Windows NT 10.0.26300.0`
+  - **Compiler Rust**: `rustc 1.99.1 (58cf8f9c3 2026-10-13)` (`--release`)
+  - **Runtime PHP/Octane**: `FrankenPHP 1.14.0` · `PHP 8.6.0` (4 worker threads, OPcache aktif, `APP_ENV=production`, `SESSION_DRIVER=array`)
+* **Tool Beban Pengujian**: [`examples/bench_load.rs`](https://github.com/pakem-rs/framework/blob/1.x/examples/bench_load.rs) (`reqwest` HTTP/1.1 keep-alive pool)
+* **Parameter Beban**:
+  - Concurrency: `64` koneksi konkuren
+  - Durasi: `5 detik` per endpoint (`0` error / `100%` sukses di semua skenario)
+* **Skenario Endpoint**:
+  1. `GET /plaintext` — Respons teks `"Hello, World!"`
+  2. `GET /json` — Serialisasi JSON sederhana
+  3. `GET /db-users` — Query SQLite in-memory (`SELECT id, name FROM bench_users LIMIT 10`)
 
 ---
 
-## 🔬 3. Pengujian Skenario Mendalam
+## 📈 2. Hasil Perbandingan Terukur
 
-### Skenario 1: RESTful JSON API Serialization
-* **Endpoint**: Mengembalikan JSON berisi metadata pengguna, timestamps, dan status otentikasi.
-* **Hasil Pakem**:
-  - Total Request: 7.105.200 permintaan dalam 60 detik.
-  - Rata-rata Throughput: **118.420 RPS**.
-  - Drop / Timeout: **0 request (0.00% error rate)**.
-  - Faktor Keberhasilan: Serialisasi zero-copy `serde_json` yang dioptimasi langsung di level register CPU.
+| Framework | `/plaintext` (RPS) | `/json` (RPS) | `/db-users` (RPS) | p50 Latency | p99 Latency |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Axum 0.8 (polos)** | **71,700.9 RPS** | **70,605.7 RPS** | **34,463.9 RPS** | 0.86–1.80 ms | 1.62–3.02 ms |
+| **Actix-web 4.20.0** | **67,219.5 RPS** | **66,934.5 RPS** | **30,251.6 RPS** | 0.92–2.06 ms | 1.92–3.23 ms |
+| **Pakem 1.0.5 (`.without_default_middleware()`)** | **61,390.5 RPS** | **60,488.2 RPS** | **34,090.1 RPS** | 1.00–1.85 ms | 2.00–2.32 ms |
+| **Pakem 1.0.5 (Full Stack Default)** | **5,207.8 RPS** *(Request)* | **7,573.6 RPS** *(Request)* | **7,364.9 RPS** *(ExtractDb)* | 8.20–9.94 ms | 13.90–35.08 ms |
+| **Laravel 13 Octane (FrankenPHP)** | **652.2 RPS** | **662.4 RPS** | **594.1 RPS** | 95.39–106.41 ms | 116.36–147.96 ms |
 
-### Skenario 2: Server-Side HTML View Rendering (Blade Engine)
-* **Endpoint**: Merender view Blade lengkap dengan master layout, perulangan 50 baris item tabel, format filter pipeline `| rupiah`, dan direktif `@auth` / `@can`.
-* **Hasil Pakem**:
-  - Rata-rata Throughput: **86.340 RPS**.
-  - Rata-rata Latensi: **0.42 ms**.
-  - Sebagai perbandingan, Laravel Blade pada PHP 8.3 Octane menghasilkan ~9.800 RPS (Pakem **~8.8x lebih cepat**).
-  - Faktor Keberhasilan: Kompilasi ekspresi Blade menjadi buffer string native Rust tanpa interpretasi runtime PHP.
-
-### Skenario 3: Database Pool & Model Query (SQLx + SQLite/Postgres)
-* **Endpoint**: Eksekusi single query `SELECT * FROM users WHERE id = $1` melalui Fluent Query Builder Pakem.
-* **Hasil Pakem**:
-  - Rata-rata Throughput: **42.150 RPS**.
-  - Rata-rata Latensi: **0.85 ms**.
-  - Faktor Keberhasilan: Asynchronous connection pool SQLx tanpa blocking overhead thread IO.
+> *(Catatan: Pada mode Full Stack Default, Pakem dijalankan dengan `APP_ENV=production` dan `RATE_LIMIT_MAX=10000000` agar beban uji tidak diblokir oleh rate limiter default 60 req/menit).*
 
 ---
 
-## 💡 4. Analisis Rekayasa: Mengapa Pakem Begitu Cepat?
+## 🔬 3. Analisis Jujur: Apa Arti Angka Ini?
 
-1. **Zero Garbage Collection (No GC Pauses)**:
-   Bahasa seperti PHP, Node.js, Python, dan bahkan Go secara periodik menghentikan atau memperlambat eksekusi thread (*stop-the-world / GC sweep*) untuk membersihkan memori yang tidak terpakai. Pakem menggunakan model *ownership* & *borrow checker* Rust yang membebaskan memori secara otomatis saat variabel keluar dari scope tanpa jeda runtime sama sekali.
-2. **Tokio Work-Stealing Async Runtime**:
-   Pakem berjalan di atas runtime asinkron Tokio. Ribuan koneksi ditangani sebagai *lightweight tasks* (green threads) yang dijadwalkan secara dinamis ke seluruh inti CPU yang tersedia.
-3. **Unified Request Bundle Tanpa Duplikasi Alokasi**:
-   Arsitektur unified `Request` Pakem membungkus state, session, body, dan URL params dalam satu struktur pointer `Arc` bersama, meminimalkan operasi alokasi heap memori (`malloc`).
-4. **Lock-Free Cache (Moka)**:
-   Mekanisme proteksi anti brute-force dan rate limiter menggunakan algoritma TinyLFU tanpa mutex lock global, mempertahankan performa linier meskipun diserang jutaan request simultan.
+1. **Pakem Mode Minimal vs Axum/Actix Polos (*Apples-to-Apples*)**:
+   - Saat middleware bawaan dimatikan menggunakan `.without_default_middleware()`, **Pakem 1.0.5** mencapai **61,390.5 RPS** (`/plaintext`), **60,488.2 RPS** (`/json`), dan **34,090.1 RPS** (`/db-users` dengan p99 **2.32 ms**).
+   - Pada skenario query database (`/db-users`), Pakem minimal mencapai **98.9%** performa Axum 0.8 polos (`34,090` vs `34,464` RPS) dan **melampaui Actix-web 4.20.0** (`30,251` RPS).
 
----
+2. **Pakem Full Stack Default vs Laravel 13 Octane**:
+   - Dalam mode default *batteries-included*, setiap request melewati seluruh stack middleware Pakem: Session SQLite Store, CSRF protection, rate limiter, i18n, compression, security headers, dan panic recovery.
+   - Meskipun membawa seluruh stack tersebut, **Pakem 1.0.5 Full Stack** tetap **8× – 12.4× lebih cepat** daripada Laravel 13 Octane (FrankenPHP) pada mesin yang sama (`7,364.9 RPS` vs `594.1 RPS` di `/db-users`, serta p99 latency ~8× lebih rendah).
 
-## 💰 5. Dampak Finansial & Penghematan Biaya Server (TCO)
-
-Dengan efisiensi memori ~38 MB pada 10.000 koneksi simultan dan latensi p99 di bawah 1 milidetik:
-* **Pengurangan Biaya Cloud**: Aplikasi berskala besar yang sebelumnya membutuhkan cluster 5 node server untuk Laravel/Node.js dapat dijalankan dengan nyaman pada **1 node server berbiaya minimal** menggunakan Pakem Framework.
-* **Green Computing**: Konsumsi CPU yang rendah secara signifikan menurunkan konsumsi energi pusat data (*data center energy footprint*).
+3. **Biaya `Request` vs Typed Extractors (`ExtractDb`)**:
+   - Extractor `Request` mengekstrak `Session`, `CsrfToken`, dan mengecek `session.get("user")` secara eager.
+   - Untuk endpoint API publik berkecepatan tinggi, gunakan typed extractor ringan seperti `ExtractDb(db)` atau aktifkan `.without_default_middleware()` pada `Application`.
 
 ---
 
-## 🧪 6. Cara Mereproduksi Pengujian Ini Sendiri
+## 🧪 4. Cara Mereproduksi Pengujian Ini Sendiri
 
-Anda dapat menjalankan pengujian benchmark ini di mesin lokal Anda menggunakan perintah:
+Seluruh kode benchmark tersedia di repositori [`pakem-rs/framework`](https://github.com/pakem-rs/framework):
 
 ```bash
-# 1. Jalankan Pakem server dalam mode rilis (teroptimasi penuh)
-cargo run --release
+# 1. Jalankan server benchmark Pakem dalam mode release
+cargo run --release --example bench_server
 
-# 2. Pada terminal terpisah, jalankan pengujian beban via wrk
-wrk -t8 -c128 -d30s http://127.0.0.1:8000/api/ping
+# 2. Di terminal terpisah, jalankan load generator
+cargo run --release --example bench_load
+
+# Atau jalankan skrip PowerShell dengan oha / wrk:
+./benches/run_bench.ps1
 ```
 
----
-
-*Pakem Whitepaper: Data nyata, kecepatan murni, dan rekayasa perangkat lunak tanpa kompromi.*
+Lihat detail lengkap metodologi dan skrip pembanding di [`benches/README.md`](https://github.com/pakem-rs/framework/blob/1.x/benches/README.md).
